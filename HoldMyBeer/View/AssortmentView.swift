@@ -15,36 +15,47 @@ struct AssortmentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(beerManager.beers) { beer in
-                    HStack(spacing: 15) {
-                        if let imageURL = beer.image_url {
-                            AsyncImage(url: URL(string: imageURL)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                            } placeholder: {
-                                ProgressView()
-                            }
-                            .frame(width: 50, height: 100, alignment: .center)
-                        } else {
-                            Text("🍻")
-                                .font(.largeTitle)
-                                .frame(width: 50, height: 100, alignment: .center)
+            Group {
+                if beerManager.searchedBeers.isEmpty {
+                    List {
+                        ForEach(beerManager.beerCatalog) {
+                            BeerListItem(beer: $0)
                         }
                         
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(beer.name)
-                                .font(.title3)
-                                .bold()
-                            Text(beer.tagline)
-                                .font(.callout)
+                        if beerManager.isShowMoreButtonActive {
+                            HStack(alignment: .center) {
+                                Spacer()
+                                Button {
+                                    beerManager.getBeers()
+                                } label: {
+                                    Text("show more")
+                                        .font(.caption)
+                                }
+                                Spacer()
+                            }
+                        }
+                    }
+                } else {
+                    List {
+                        ForEach(beerManager.searchedBeers) {
+                            BeerListItem(beer: $0)
                         }
                     }
                 }
             }
             .listStyle(.plain)
+            .navigationTitle(beerManager.searchedBeers.isEmpty ? "Beer Assortment" : "Search Result")
             .toolbar {
+                if !beerManager.searchedBeers.isEmpty {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            beerManager.resetSearchResult()
+                        } label: {
+                            Image(systemName: "xmark.circle")
+                        }
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         showSheet = true
@@ -53,10 +64,12 @@ struct AssortmentView: View {
                     }
                 }
             }
-            .navigationTitle("Beer Assortment")
-        }
-        .sheet(isPresented: $showSheet) {
-            BeerSearch(beerManager: beerManager)
+            .sheet(isPresented: $showSheet) {
+                BeerSearch(beerManager: beerManager)
+            }
+            .onAppear {
+                beerManager.getBeers()
+            }
         }
     }
 }
