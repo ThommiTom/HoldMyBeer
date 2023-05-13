@@ -31,7 +31,7 @@ struct CommonPropertiesView: View {
                         .foregroundColor(.secondary)
                         .opacity(0.75)
                 }
-                .alert("Info", isPresented: $showAlert) {} message: {
+                .alert(common.title, isPresented: $showAlert) {} message: {
                     VStack {
                         Text(common.description)
                     }

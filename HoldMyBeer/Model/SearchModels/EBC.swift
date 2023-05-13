@@ -8,8 +8,8 @@
 import Foundation
 
 struct EBC: CommonProperties {
-    let title = "European Brewery Convention"
-    let description = "EBC - European Brewery Convention describes the color strength of beer in Europe.\nThe color number defined by the European Brewery Convention is determined photometrically from a standardized mash."
+    let title = "EBC"
+    let description = "European Brewery Convention describes the color strength of beer in Europe.\nThe color number defined by the European Brewery Convention is determined photometrically from a standardized mash."
     
     let min = 0.0
     let max = 40.0

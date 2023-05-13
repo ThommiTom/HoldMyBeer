@@ -62,8 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				452703552A0F89E900469098 /* AssortmentView.swift */,
-				45CE971F2A0F9681008EC77A /* BeerSearch.swift */,
-				45CE97252A0FAE0B008EC77A /* CommonPropertiesView.swift */,
+				45CE972F2A0FE351008EC77A /* SearchViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -93,6 +92,15 @@
 				45CE972C2A0FB4BB008EC77A /* EBC.swift */,
 			);
 			path = SearchModels;
+			sourceTree = "<group>";
+		};
+		45CE972F2A0FE351008EC77A /* SearchViews */ = {
+			isa = PBXGroup;
+			children = (
+				45CE971F2A0F9681008EC77A /* BeerSearch.swift */,
+				45CE97252A0FAE0B008EC77A /* CommonPropertiesView.swift */,
+			);
+			path = SearchViews;
 			sourceTree = "<group>";
 		};
 		45DB5E4F2A0EA49200CBE230 = {

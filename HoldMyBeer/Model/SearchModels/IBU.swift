@@ -8,8 +8,8 @@
 import Foundation
 
 struct IBU: CommonProperties {
-    let title = "International Bitterness Unit"
-    let description = "IBU - International Bitterness Unit attempt to rate the relative bitterness of beer.\nThe bitterness of beer is provided by compounds such as humulones, or alpha acids from hops used during brewing."
+    let title = "IBU"
+    let description = "International Bitterness Unit attempt to rate the relative bitterness of beer.\nThe bitterness of beer is provided by compounds such as humulones, or alpha acids from hops used during brewing."
     
     let min = 0.0
     let max = 120.0

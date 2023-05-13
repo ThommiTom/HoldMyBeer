@@ -8,8 +8,8 @@
 import Foundation
 
 struct ABV: CommonProperties {
-    let title = "Alcohol by Volume"
-    let description = "ABV - Alcohol by volume (abbreviated as ABV, abv, or alc/vol) is a standard measure of how much alcohol (ethanol) is contained in a given volume of an alcoholic beverage (expressed as a volume percent)."
+    let title = "ABV"
+    let description = "Alcohol by volume (abbreviated as ABV, abv, or alc/vol) is a standard measure of how much alcohol (ethanol) is contained in a given volume of an alcoholic beverage (expressed as a volume percent)."
     
     let min = 0.0
     let max = 13.0
