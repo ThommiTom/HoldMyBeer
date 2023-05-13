@@ -23,7 +23,6 @@ class URLBuilder {
     private var queryItems: [URLQueryItem]
     
     
-    // searching for inequaltity parameter
     func addQueryItem(for param: InequalityParameter, _ value: Double) -> URLBuilder {
         let newQueryItem = URLQueryItem(name: param.rawValue, value: String(value))
         let opposite = opposites[param]!
@@ -39,7 +38,29 @@ class URLBuilder {
         return self
     }
     
-    // searching for fuzzy parameter
+    func addQueryItem(for param: InequalityParameter, _ value: String) -> URLBuilder {
+        let newQueryItem = URLQueryItem(name: param.rawValue, value: value)
+        let opposite = opposites[param]!
+        
+        if let index = queryItems.firstIndex(where: { $0.name == param.rawValue }) {
+            queryItems[index] = newQueryItem
+        } else if let index = queryItems.firstIndex(where: { $0.name == opposite.rawValue }) {
+            queryItems[index] = newQueryItem
+        } else {
+            queryItems.append(newQueryItem)
+        }
+        
+        return self
+    }
+    
+    func removeQueryItem(for param: InequalityParameter) -> URLBuilder {
+        if let index = queryItems.firstIndex(where: { $0.name == param.rawValue }) {
+            queryItems.remove(at: index)
+        }
+        
+        return self
+    }
+    
     func addFuzzyQueryItem(for param: FuzzyParameter, _ name: String) -> URLBuilder {
         let modifiedName = name.replacingOccurrences(of: " ", with: "_").lowercased()
         
@@ -49,6 +70,14 @@ class URLBuilder {
             queryItems[index] = newItem
         } else {
             queryItems.append(newItem)
+        }
+        
+        return self
+    }
+    
+    func removeFuzzyQueryItem(for param: FuzzyParameter) -> URLBuilder {
+        if let index = queryItems.firstIndex(where: { $0.name == param.rawValue }) {
+            queryItems.remove(at: index)
         }
         
         return self
@@ -72,6 +101,8 @@ enum InequalityParameter: String {
     case bitternessLessThan = "ibu_lt"
     case beerColorDarkerThan = "ebc_gt"
     case beerColorBrighterThan = "ebc_lt"
+    case brewedBefore = "brewed_before"
+    case brewedAfter = "brewed_after"
 }
 
 fileprivate let opposites: Dictionary<InequalityParameter, InequalityParameter> = [
@@ -80,14 +111,14 @@ fileprivate let opposites: Dictionary<InequalityParameter, InequalityParameter> 
     .bitternessGreaterThan : .bitternessLessThan,
     .bitternessLessThan : .bitternessGreaterThan,
     .beerColorDarkerThan : .beerColorBrighterThan,
-    .beerColorBrighterThan : .beerColorDarkerThan
+    .beerColorBrighterThan : .beerColorDarkerThan,
+    .brewedBefore : .brewedAfter,
+    .brewedAfter : .brewedBefore
 ]
 
 enum FuzzyParameter: String {
     case beerName = "beer_name"
     case food
-    case brewedBefore = "brewed_before"
-    case brewedAfter = "brewed_after"
     case yeast
     case malt
     case hop
