@@ -13,7 +13,15 @@ class NetworkManager {
     private init() {}
     
     
-    func networkCall<T: Decodable>(with request: URLRequest, completionHandler completion: @escaping (Result<T, NetworkError>) -> Void) async {
+    func networkCall<T: Decodable>(with url: URL?, completionHandler completion: @escaping (Result<T, NetworkError>) -> Void) async {
+        guard let url = url else {
+            completion(.failure(.failedCreatingURL))
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        
         URLSession.shared.dataTask(with: request) { data, urlResponse, error in
             // handle eventual error
             guard error == nil else {
@@ -46,6 +54,7 @@ class NetworkManager {
         }
         .resume()
     }
+    
     
     private func parse<T: Decodable>(data: Data, completionHandler completion: @escaping (Result<T, NetworkError>) -> Void) {
         do {

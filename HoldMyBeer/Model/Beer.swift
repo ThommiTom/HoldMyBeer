@@ -11,12 +11,12 @@ struct Beer: Identifiable, Codable, Hashable {
     let tagline: String
     let firstBrewed: String?
     let description: String
-    let imageURL: String?
+    let image_url: String?
     let abv: Double
     let ibu: Double?
     let targetFg: Int?
     let targetOg: Double?
-    let ebc: Int?
+    let ebc: Double?
     let srm, ph: Double?
     let attenuationLevel: Double?
 

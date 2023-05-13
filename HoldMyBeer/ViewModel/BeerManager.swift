@@ -9,14 +9,16 @@ import Foundation
 
 class BeerManager: ObservableObject {
     @Published var beers: [Beer] = []
+
     
-    func getBeers(request: URLRequest) {
+    // MARK: - NETWORKING
+    func getBeers(url: URL?) {
         Task {
-            await NetworkManager.shared.networkCall(with: request) { (result: Result<[Beer], NetworkError>) in
+            await NetworkManager.shared.networkCall(with: url) { (result: Result<[Beer], NetworkError>) in
                 switch result {
                 case .success(let beers):
                     DispatchQueue.main.async {
-                        self.beers.append(contentsOf: beers)
+                        self.beers = beers
                     }
                 case .failure(let error):
                     print(error)
