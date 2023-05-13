@@ -85,15 +85,20 @@ struct BeerSearch: View {
             .navigationTitle("Search Parameter")
             
             Spacer()
-            Button("go") {
+
+            Button {
                 if let url = URLBuilder.shared.buildURL() {
-                    print(url.absoluteString)
-                    beerManager.getBeers(url: url)
+                    beerManager.searchBeers(url: url)
                 }
                 
                 dismiss()
                 searchParameter = SearchParameter()
+            } label: {
+                Text("search")
+                    .frame(maxWidth: .infinity)
+                    
             }
+            .padding()
             .buttonStyle(.borderedProminent)
         }
     }

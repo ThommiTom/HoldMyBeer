@@ -8,22 +8,27 @@
 import Foundation
 
 class BeerManager: ObservableObject {
-    @Published var beers: [Beer] = []
+    @Published private(set) var beerCatalog: [Beer] = []
+    @Published private(set) var searchedBeers: [Beer] = []
 
+    @Published var isShowMoreButtonActive = true
     
-    // MARK: - NETWORKING
-    func getBeers(url: URL?) {
-        Task {
-            await NetworkManager.shared.networkCall(with: url) { (result: Result<[Beer], NetworkError>) in
-                switch result {
-                case .success(let beers):
-                    DispatchQueue.main.async {
-                        self.beers = beers
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+    private(set) var pageNo = 1
+    let itemsPerPage = 50
+    
+    func appendCatalog(with beers: [Beer]) {
+        beerCatalog.append(contentsOf: beers)
+    }
+    
+    func setSearched(_ beers: [Beer]) {
+        searchedBeers = beers
+    }
+    
+    func resetSearchResult() {
+        searchedBeers.removeAll()
+    }
+    
+    func incrementPageNo() {
+        pageNo += 1
     }
 }
