@@ -22,96 +22,30 @@ class URLBuilder {
     private var urlComponents: URLComponents
     private var queryItems: [URLQueryItem]
     
-//    private func findItemIndex(for criteria: [String]) -> Int? {
-//        if let index = queryItems.firstIndex(where: { $0.name ==  }) {
-//            queryItems[index] = newItem
-//        } else if let index = queryItems.firstIndex(where: { $0.name == "abv_lt" }) {
-//            queryItems[index] = newItem
-//        } else {
-//            queryItems.append(newItem)
-//        }
-//    }
     
-    // ABV - Alcohol by Volume
-    func setAlcoholByVolume(_ criteria: Inequality, _ percentage: Int) -> URLBuilder {
-        var param: String
+    // searching for inequaltity parameter
+    func addQueryItem(for param: InequalityParameter, _ value: Double) -> URLBuilder {
+        let newQueryItem = URLQueryItem(name: param.rawValue, value: String(value))
+        let opposite = opposites[param]!
         
-        switch criteria {
-        case .greaterThan:
-            param = "abv_gt"
-        case .lessThan:
-            param = "abv_lt"
-        }
-        
-        let newItem = URLQueryItem(name: param, value: String(percentage))
-        
-        if let index = queryItems.firstIndex(where: { $0.name == "abv_gt" }) {
-            queryItems[index] = newItem
-        } else if let index = queryItems.firstIndex(where: { $0.name == "abv_lt" }) {
-            queryItems[index] = newItem
+        if let index = queryItems.firstIndex(where: { $0.name == param.rawValue }) {
+            queryItems[index] = newQueryItem
+        } else if let index = queryItems.firstIndex(where: { $0.name == opposite.rawValue }) {
+            queryItems[index] = newQueryItem
         } else {
-            queryItems.append(newItem)
+            queryItems.append(newQueryItem)
         }
         
         return self
     }
     
-    // IBU - International Bitterness Unit
-    func setBitterness(_ criteria: Inequality, _ value: Int) -> URLBuilder {
-        var param: String
-        
-        switch criteria {
-        case .greaterThan:
-            param = "ibu_gt"
-        case .lessThan:
-            param = "ibu_lt"
-        }
-        
-        let newItem = URLQueryItem(name: param, value: String(value))
-        
-        if let index = queryItems.firstIndex(where: { $0.name == "ibu_gt" }) {
-            queryItems[index] = newItem
-        } else if let index = queryItems.firstIndex(where: { $0.name == "ibu_lt" }) {
-            queryItems[index] = newItem
-        } else {
-            queryItems.append(newItem)
-        }
-        
-        return self
-    }
-    
-    // EBC - Estimating Beer Color
-    func setColorIntesity(_ criteria: Inequality, _ value: Int) -> URLBuilder {
-        var param: String
-        
-        switch criteria {
-        case .greaterThan:
-            param = "ebc_gt"
-        case .lessThan:
-            param = "ebc_gt"
-        }
-        
-        let newItem = URLQueryItem(name: param, value: String(value))
-        
-        if let index = queryItems.firstIndex(where: { $0.name == "ebc_gt" }) {
-            queryItems[index] = newItem
-        } else if let index = queryItems.firstIndex(where: { $0.name == "ebc_gt" }) {
-            queryItems[index] = newItem
-        } else {
-            queryItems.append(newItem)
-        }
-        
-        return self
-    }
-    
-    // setting a particular name
-    func setBeerName(_ name: String) -> URLBuilder {
+    // searching for fuzzy parameter
+    func addFuzzyQueryItem(for param: FuzzyParameter, _ name: String) -> URLBuilder {
         let modifiedName = name.replacingOccurrences(of: " ", with: "_").lowercased()
         
+        let newItem = URLQueryItem(name: param.rawValue, value: modifiedName)
         
-        let newItem = URLQueryItem(name: "beer_name", value: modifiedName)
-        
-        if let index = queryItems.firstIndex(where: { $0.name == "beer_name" }) {
+        if let index = queryItems.firstIndex(where: { $0.name == param.rawValue }) {
             queryItems[index] = newItem
         } else {
             queryItems.append(newItem)
@@ -120,8 +54,7 @@ class URLBuilder {
         return self
     }
     
-    #warning("continue with implementation of further params!")
-    
+    // provides the constructed URL
     func buildURL() -> URL? {
         urlComponents.queryItems = queryItems
         let url = urlComponents.url
@@ -132,12 +65,30 @@ class URLBuilder {
     
 }
 
-enum Inequality {
-    case greaterThan
-    case lessThan
+enum InequalityParameter: String {
+    case alcoholByVolumeGreaterThan = "abv_gt"
+    case alcoholByVolumeLessThan = "abv_lt"
+    case bitternessGreaterThan = "ibu_gt"
+    case bitternessLessThan = "ibu_lt"
+    case beerColorDarkerThan = "ebc_gt"
+    case beerColorBrighterThan = "ebc_lt"
 }
 
-enum TimeSpan {
-    case brewedBefore
-    case brewedAfter
+fileprivate let opposites: Dictionary<InequalityParameter, InequalityParameter> = [
+    .alcoholByVolumeGreaterThan : .alcoholByVolumeLessThan,
+    .alcoholByVolumeLessThan : .alcoholByVolumeGreaterThan,
+    .bitternessGreaterThan : .bitternessLessThan,
+    .bitternessLessThan : .bitternessGreaterThan,
+    .beerColorDarkerThan : .beerColorBrighterThan,
+    .beerColorBrighterThan : .beerColorDarkerThan
+]
+
+enum FuzzyParameter: String {
+    case beerName = "beer_name"
+    case food
+    case brewedBefore = "brewed_before"
+    case brewedAfter = "brewed_after"
+    case yeast
+    case malt
+    case hop
 }

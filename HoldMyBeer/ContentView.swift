@@ -31,9 +31,9 @@ struct ContentView: View {
                     ForEach(beerManager.beers) { beer in
                         VStack(alignment: .leading) {
                             Text(beer.name)
-                                .font(.largeTitle)
+                                .font(.title)
                                 .bold()
-                            Text(beer.description)
+                            Text(beer.tagline)
                                 .font(.callout)
                         }
                     }
@@ -46,10 +46,11 @@ struct ContentView: View {
             Button("Network Call 1") {
                 beerManager.beers.removeAll()
                 let url = URLBuilder.shared
-                    .setAlcoholByVolume(.greaterThan, 7)
-                    .setBitterness(.lessThan, 50)
-                    .setBeerName("ab")
-                    .setColorIntesity(.lessThan, 20)
+                    .addQueryItem(for: .alcoholByVolumeGreaterThan, 7.1)
+                    .addQueryItem(for: .bitternessLessThan, 50.0)
+                    .addFuzzyQueryItem(for: .beerName, "ab")
+                    .addQueryItem(for: .beerColorBrighterThan, 20)
+                    .addFuzzyQueryItem(for: .brewedBefore, "08-2011")
                     .buildURL()
                 
                 if let url = url {
@@ -66,23 +67,33 @@ struct ContentView: View {
             Button("Network Call 2") {
                 beerManager.beers.removeAll()
                 let url = URLBuilder.shared
-                    .setBeerName("Lost dog")
-                    .setAlcoholByVolume(.greaterThan, 7)
-                    .setBitterness(.lessThan, 50)
+                    .addQueryItem(for: .alcoholByVolumeGreaterThan, 7.1)
+                    .addQueryItem(for: .bitternessLessThan, 50.0)
+                    .addFuzzyQueryItem(for: .beerName, "ab")
+                    .addQueryItem(for: .beerColorBrighterThan, 20)
+                    .addQueryItem(for: .alcoholByVolumeLessThan, 5)
+                    .addQueryItem(for: .bitternessGreaterThan, 45.0)
+                    .addFuzzyQueryItem(for: .beerName, "dog")
+                    .addQueryItem(for: .beerColorDarkerThan, 22)
                     .buildURL()
                 
                 if let url = url {
                     print(url.absoluteString)
                     let request = URLRequest(url: url)
                     beerManager.getBeers(request: request)
+                } else {
+                    print("Oops something went wrong..")
                 }
+                
             }
             .buttonStyle(.bordered)
             
             Button("Network Call 3") {
                 beerManager.beers.removeAll()
                 let url = URLBuilder.shared
-                    .setBeerName("check mate")
+                    .addFuzzyQueryItem(for: .beerName, "Lost dog")
+                    .addQueryItem(for: .alcoholByVolumeGreaterThan, 7)
+                    .addQueryItem(for: .bitternessLessThan, 50.5)
                     .buildURL()
                 
                 if let url = url {
@@ -92,23 +103,6 @@ struct ContentView: View {
                 }
             }
             .buttonStyle(.bordered)
-            
-            Button("Network Call 4") {
-                beerManager.beers.removeAll()
-                let url = URLBuilder.shared
-                            .setAlcoholByVolume(.lessThan, 5)
-                            .setBitterness(.greaterThan, 36)
-                            .setColorIntesity(.greaterThan, 35)
-                            .buildURL()
-                
-                if let url = url {
-                    print(url.absoluteString)
-                    let request = URLRequest(url: url)
-                    beerManager.getBeers(request: request)
-                }
-            }
-            .buttonStyle(.bordered)
-            
         }
     }
 }
