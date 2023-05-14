@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BeerListItem: View {
     var beer: Beer
+    var width: CGFloat = 50
+    var height: CGFloat = 100
     
     var body: some View {
         HStack(spacing: 15) {
@@ -20,11 +22,11 @@ struct BeerListItem: View {
                 } placeholder: {
                     ProgressView()
                 }
-                .frame(width: 50, height: 100, alignment: .center)
+                .frame(width: width, height: height, alignment: .center)
             } else {
                 Text("🍻")
                     .font(.largeTitle)
-                    .frame(width: 50, height: 100, alignment: .center)
+                    .frame(width: width, height: height, alignment: .center)
             }
             
             VStack(alignment: .leading, spacing: 10) {
@@ -33,6 +35,28 @@ struct BeerListItem: View {
                     .bold()
                 Text(beer.tagline)
                     .font(.callout)
+                
+                HStack {
+                    if let ebc = beer.ebc {
+                        Text("Color")
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                        RoundedRectangle(cornerRadius: 5)
+                            .strokeBorder(.secondary, lineWidth: 1)
+                            .background(RoundedRectangle(cornerRadius: 5).fill(EBCScale.getColor(by: ebc)))
+                            .frame(width: 25, height: 25, alignment: .center)
+                    }
+                    Spacer()
+                    Text("alc \(beer.abv, specifier: "%.1f") % vol.")
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                    Spacer()
+                    if let ibu = beer.ibu {
+                        Text("Bitterness \(ibu, specifier: "%.0f")/120")
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
+                }
             }
         }
     }
