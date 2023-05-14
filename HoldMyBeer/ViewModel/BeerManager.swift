@@ -14,6 +14,10 @@ class BeerManager: ObservableObject {
     @Published var alertData = AlertData()
     @Published var isShowMoreButtonActive = true
     
+    @Published private(set) var addedToBrew: Set<Int> = []
+    
+    @Published var sorting: BeerSorting = .none
+    
     init() {
         self.getBeers()
     }
@@ -58,5 +62,12 @@ class BeerManager: ObservableObject {
     
     func incrementPageNo() {
         pageNo += 1
+    }
+    
+    func addToBrews(id: Int) {
+        if !addedToBrew.contains(id) {
+            print("inserting")
+            addedToBrew.insert(id)
+        }
     }
 }

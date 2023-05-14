@@ -22,11 +22,13 @@ struct IngredientsView: View {
                     .font(.caption2)
                     .foregroundColor(.secondary)
                 ForEach(ingridients.malt, id: \.self) { malt in
-                    HStack {
-                        Text(malt.name)
-                        Spacer()
-                        Text("\(malt.amount.value, specifier: "%.1f")")
-                        Text(malt.amount.unit)
+                    if let value = malt.amount.value {
+                        HStack {
+                            Text(malt.name)
+                            Spacer()
+                            Text("\(value, specifier: "%.1f")")
+                            Text(malt.amount.unit)
+                        }
                     }
                 }
             }
@@ -37,26 +39,30 @@ struct IngredientsView: View {
                     .font(.caption2)
                     .foregroundColor(.secondary)
                 ForEach(ingridients.hops, id: \.self) { hop in
-                    HStack {
-                        Text(hop.name)
-                        Spacer()
-                        Text("\(hop.amount.value, specifier: "%.1f")")
-                        Text(hop.amount.unit)
+                    if let value = hop.amount.value {
+                        HStack {
+                            Text(hop.name)
+                            Spacer()
+                            Text("\(value, specifier: "%.1f")")
+                            Text(hop.amount.unit)
+                        }
                     }
                 }
             }
             .padding(.bottom, 15)
             
-            VStack(alignment: .leading) {
-                Text("YEAST")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-                HStack {
-                    Text(ingridients.yeast)
-                    Spacer()
+            if let yeast = ingridients.yeast {
+                VStack(alignment: .leading) {
+                    Text("YEAST")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                    HStack {
+                        Text(yeast)
+                        Spacer()
+                    }
                 }
+                .padding(.bottom, 15)
             }
-            .padding(.bottom, 15)
         }
     }
 }

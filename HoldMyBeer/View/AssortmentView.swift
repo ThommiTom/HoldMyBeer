@@ -17,11 +17,21 @@ struct AssortmentView: View {
             Group {
                 if beerManager.searchedBeers.isEmpty {
                     List {
-                        ForEach(beerManager.beerCatalog) { beer in
+                        ForEach(beerManager.sortedBeers) { beer in
                             NavigationLink(value: beer) {
                                 BeerListItem(beer: beer)
+                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                        if !beerManager.addedToBrew.contains(beer.id) {
+                                            Button {
+                                                beerManager.addToBrews(id: beer.id)
+                                                // TODO: Save beer for ToBrew
+                                            } label: {
+                                                Label("add to\nTo Brews", systemImage: "checklist")
+                                            }
+                                            .tint(.green)
+                                        }
+                                    }
                             }
-                            
                         }
                         
                         ShowMoreButton(showButton: $beerManager.isShowMoreButtonActive) {
@@ -30,9 +40,20 @@ struct AssortmentView: View {
                     }
                 } else {
                     List {
-                        ForEach(beerManager.searchedBeers) { beer in
+                        ForEach(beerManager.sortedSearchedBeers) { beer in
                             NavigationLink(value: beer) {
                                 BeerListItem(beer: beer)
+                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                        if !beerManager.addedToBrew.contains(beer.id) {
+                                            Button {
+                                                beerManager.addToBrews(id: beer.id)
+                                                // TODO: Save beer for ToBrew
+                                            } label: {
+                                                Label("add to\nTo Brews", systemImage: "checklist")
+                                            }
+                                            .tint(.green)
+                                        }
+                                    }
                             }
                         }
                     }
@@ -45,7 +66,7 @@ struct AssortmentView: View {
             }
             .toolbar {
                 if !beerManager.searchedBeers.isEmpty {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
                         Button {
                             beerManager.resetSearchResult()
                         } label: {
@@ -54,7 +75,17 @@ struct AssortmentView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Image(systemName: "arrow.up.arrow.down")
+                        .foregroundColor(.blue)
+                        .contextMenu {
+                            ForEach(BeerSorting.allCases) { sortCase in
+                                Button(sortCase.rawValue) {
+                                    self.beerManager.sorting = sortCase
+                                }
+                            }
+                        }
+                    
                     Button {
                         showSheet = true
                     } label: {
