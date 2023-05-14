@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var beerManager = BeerManager()
+    @StateObject var brewManager = BrewManager()
     
     var body: some View {
         TabView {
@@ -18,7 +19,7 @@ struct ContentView: View {
                     Text("Assortment")
                 }
             
-            ToBrewsView()
+            ToBrewsView(brewManager: brewManager)
             .tabItem {
                 Image(systemName: "checklist")
                 Text("To Brews")

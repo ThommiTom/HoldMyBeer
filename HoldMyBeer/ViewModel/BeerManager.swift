@@ -14,7 +14,7 @@ class BeerManager: ObservableObject {
     @Published var alertData = AlertData()
     @Published var isShowMoreButtonActive = true
     
-    @Published private(set) var addedToBrew: Set<Int> = []
+    @Published private(set) var addedToBrew = [Int]()
     
     @Published var sorting: BeerSorting = .none
     
@@ -66,8 +66,24 @@ class BeerManager: ObservableObject {
     
     func addToBrews(id: Int) {
         if !addedToBrew.contains(id) {
-            print("inserting")
-            addedToBrew.insert(id)
+            addedToBrew.append(id)
+        }
+    }
+    
+    func containedInToBrew(id: Int) -> Bool {
+        addedToBrew.contains(id)
+    }
+    
+    func saveBeerToBrews(_ beer: Beer) {
+        Persistence.shared.saveBeersToBrew(beer)
+    }
+    
+    func loadBeersToBrew() {
+        let loaded = Persistence.shared.loadBeersToBrew()
+        
+        addedToBrew.removeAll()
+        for item in loaded {
+            addedToBrew.append(item.id)
         }
     }
 }

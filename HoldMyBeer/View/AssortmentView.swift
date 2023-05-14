@@ -19,16 +19,16 @@ struct AssortmentView: View {
                     List {
                         ForEach(beerManager.sortedBeers) { beer in
                             NavigationLink(value: beer) {
-                                BeerListItem(beer: beer)
+                                BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
                                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                         if !beerManager.addedToBrew.contains(beer.id) {
                                             Button {
                                                 beerManager.addToBrews(id: beer.id)
-                                                // TODO: Save beer for ToBrew
+                                                beerManager.saveBeerToBrews(beer)
                                             } label: {
-                                                Label("add to\nTo Brews", systemImage: "checklist")
+                                                Label("add to\n\'To Brews\'", systemImage: "checklist")
                                             }
-                                            .tint(.green)
+                                            .tint(.blue)
                                         }
                                     }
                             }
@@ -42,16 +42,16 @@ struct AssortmentView: View {
                     List {
                         ForEach(beerManager.sortedSearchedBeers) { beer in
                             NavigationLink(value: beer) {
-                                BeerListItem(beer: beer)
+                                BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
                                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                         if !beerManager.addedToBrew.contains(beer.id) {
                                             Button {
                                                 beerManager.addToBrews(id: beer.id)
-                                                // TODO: Save beer for ToBrew
+                                                beerManager.saveBeerToBrews(beer)
                                             } label: {
-                                                Label("add to\nTo Brews", systemImage: "checklist")
+                                                Label("add to\n\'To Brews\'", systemImage: "checklist")
                                             }
-                                            .tint(.green)
+                                            .tint(.blue)
                                         }
                                     }
                             }
@@ -97,6 +97,9 @@ struct AssortmentView: View {
                 SearchView {
                     beerManager.searchBeers()
                 }
+            }
+            .onAppear {
+                beerManager.loadBeersToBrew()
             }
             .alert(beerManager.alertData.title, isPresented: $beerManager.alertData.show) {
                 Button("OK") {}

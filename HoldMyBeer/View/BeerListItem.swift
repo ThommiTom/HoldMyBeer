@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BeerListItem: View {
     var beer: Beer
+    var containedInToBrew: Bool = false
     var width: CGFloat = 50
     var height: CGFloat = 100
     
@@ -30,6 +31,10 @@ struct BeerListItem: View {
             }
             
             VStack(alignment: .leading, spacing: 10) {
+                Text("contained in To Brew 🍺")
+                    .foregroundColor(.secondary)
+                    .font(.caption)
+                    .opacity(containedInToBrew ? 1 : 0)
                 Text(beer.name)
                     .font(.title3)
                     .bold()
@@ -64,6 +69,6 @@ struct BeerListItem: View {
 
 struct AsyncImageView_Previews: PreviewProvider {
     static var previews: some View {
-        BeerListItem(beer: .example)
+        BeerListItem(beer: .example, containedInToBrew: true)
     }
 }

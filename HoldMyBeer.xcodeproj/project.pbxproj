@@ -12,6 +12,7 @@
 		45158E752A1146E8009ABB14 /* FileManager+DocDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E742A1146E8009ABB14 /* FileManager+DocDirectory.swift */; };
 		45158E772A1147EE009ABB14 /* BrewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E762A1147EE009ABB14 /* BrewManager.swift */; };
 		45158E792A114E1B009ABB14 /* BeerManager+Sortings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E782A114E1B009ABB14 /* BeerManager+Sortings.swift */; };
+		45158E7B2A115BAE009ABB14 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E7A2A115BAE009ABB14 /* Persistence.swift */; };
 		452703562A0F89E900469098 /* AssortmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452703552A0F89E900469098 /* AssortmentView.swift */; };
 		4562F31B2A0ED7350056201B /* BeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562F31A2A0ED7350056201B /* BeerManager.swift */; };
 		45C07A542A10C2270058B3B9 /* ShowMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C07A532A10C2270058B3B9 /* ShowMoreButton.swift */; };
@@ -47,6 +48,7 @@
 		45158E742A1146E8009ABB14 /* FileManager+DocDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DocDirectory.swift"; sourceTree = "<group>"; };
 		45158E762A1147EE009ABB14 /* BrewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewManager.swift; sourceTree = "<group>"; };
 		45158E782A114E1B009ABB14 /* BeerManager+Sortings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeerManager+Sortings.swift"; sourceTree = "<group>"; };
+		45158E7A2A115BAE009ABB14 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		452703552A0F89E900469098 /* AssortmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssortmentView.swift; sourceTree = "<group>"; };
 		4562F31A2A0ED7350056201B /* BeerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerManager.swift; sourceTree = "<group>"; };
 		45C07A532A10C2270058B3B9 /* ShowMoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreButton.swift; sourceTree = "<group>"; };
@@ -88,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45158E7C2A115BB4009ABB14 /* Auxiliaries */ = {
+			isa = PBXGroup;
+			children = (
+				45C07A602A1109E00058B3B9 /* EBCScale.swift */,
+				45158E7A2A115BAE009ABB14 /* Persistence.swift */,
+			);
+			path = Auxiliaries;
+			sourceTree = "<group>";
+		};
 		452703572A0F89F300469098 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +185,7 @@
 			children = (
 				45DB5E5B2A0EA49200CBE230 /* HoldMyBeerApp.swift */,
 				45DB5E5D2A0EA49200CBE230 /* ContentView.swift */,
-				45C07A602A1109E00058B3B9 /* EBCScale.swift */,
+				45158E7C2A115BB4009ABB14 /* Auxiliaries */,
 				45C07A5F2A1104760058B3B9 /* Extensions */,
 				45CE97292A0FB2D3008EC77A /* Protocol */,
 				45DB5E6C2A0EA7E900CBE230 /* Model */,
@@ -315,6 +326,7 @@
 				45158E732A1145A1009ABB14 /* RatedBrewsView.swift in Sources */,
 				45C07A612A1109E00058B3B9 /* EBCScale.swift in Sources */,
 				45C07A652A1122550058B3B9 /* IngredientsView.swift in Sources */,
+				45158E7B2A115BAE009ABB14 /* Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

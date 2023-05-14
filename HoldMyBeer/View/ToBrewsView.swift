@@ -8,20 +8,39 @@
 import SwiftUI
 
 struct ToBrewsView: View {
+    @ObservedObject var brewManager: BrewManager
     
     var body: some View {
         NavigationStack {
-            Text("TODO")
-                .navigationTitle("\"To Brews\" (To Dos)")
+            Group {
+                if brewManager.beers.isEmpty {
+                    VStack {
+                        Text("No beers to brew!")
+                    }
+                } else {
+                    List {
+                        ForEach(brewManager.beers) { beer in
+//                            NavigationLink(value: beer) {
+//                                BeerListItem(beer: beer)
+//                            }
+                            BeerListItem(beer: beer)
+                        }
+                        .onDelete(perform: brewManager.removeBeer)
+                        
+                    }
+                    .listStyle(.plain)
+                }
+            }
+            .navigationTitle("\'To Brews\' (To Dos)")
         }
         .onAppear {
-            // TODO: load to brews beers
+            brewManager.loadBeers()
         }
     }
 }
 
 struct ToBrewsView_Previews: PreviewProvider {
     static var previews: some View {
-        ToBrewsView()
+        ToBrewsView(brewManager: BrewManager())
     }
 }

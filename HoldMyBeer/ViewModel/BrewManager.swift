@@ -8,5 +8,22 @@
 import Foundation
 
 class BrewManager: ObservableObject {
-    @Published private(set) var beers: [Beer] = []
+    @Published private(set) var beers =  [Beer]()
+    
+    init() {
+        self.loadBeers()
+    }
+    
+    func saveBeers() {
+        Persistence.shared.saveBeersToBrew(beers)
+    }
+    
+    func loadBeers() {
+        self.beers =  Persistence.shared.loadBeersToBrew()
+    }
+    
+    func removeBeer(at offsets: IndexSet) {
+        beers.remove(atOffsets: offsets)
+        saveBeers()
+    }
 }
