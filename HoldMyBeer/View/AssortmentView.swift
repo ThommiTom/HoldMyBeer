@@ -17,8 +17,11 @@ struct AssortmentView: View {
             Group {
                 if beerManager.searchedBeers.isEmpty {
                     List {
-                        ForEach(beerManager.beerCatalog) {
-                            BeerListItem(beer: $0)
+                        ForEach(beerManager.beerCatalog) { beer in
+                            NavigationLink(value: beer) {
+                                BeerListItem(beer: beer)
+                            }
+                            
                         }
                         
                         ShowMoreButton(showButton: $beerManager.isShowMoreButtonActive) {
@@ -27,14 +30,19 @@ struct AssortmentView: View {
                     }
                 } else {
                     List {
-                        ForEach(beerManager.searchedBeers) {
-                            BeerListItem(beer: $0)
+                        ForEach(beerManager.searchedBeers) { beer in
+                            NavigationLink(value: beer) {
+                                BeerListItem(beer: beer)
+                            }
                         }
                     }
                 }
             }
             .listStyle(.plain)
             .navigationTitle(beerManager.searchedBeers.isEmpty ? "Beer Assortment" : "Search Result")
+            .navigationDestination(for: Beer.self) { beer in
+                BeerDetailView(beer: beer)
+            }
             .toolbar {
                 if !beerManager.searchedBeers.isEmpty {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -65,9 +73,6 @@ struct AssortmentView: View {
                 VStack {
                     Text(beerManager.alertData.message)
                 }
-            }
-            .onAppear {
-                beerManager.getBeers()
             }
         }
     }

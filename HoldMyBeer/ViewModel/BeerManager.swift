@@ -14,6 +14,10 @@ class BeerManager: ObservableObject {
     @Published var alertData = AlertData()
     @Published var isShowMoreButtonActive = true
     
+    init() {
+        self.getBeers()
+    }
+    
     private(set) var viewTitle: String = ""
     
     private(set) var pageNo = 1

@@ -14,20 +14,20 @@ struct Beer: Identifiable, Codable, Hashable {
     let image_url: String?
     let abv: Double
     let ibu: Double?
-    let targetFg: Int?
-    let targetOg: Double?
+    let target_fg: Int?
+    let target_og: Double?
     let ebc: Double?
     let srm, ph: Double?
     let attenuationLevel: Double?
 
-//    let ingredients: Ingredients?
-    let foodPairing: [String]?
-    let brewersTips: String?
+    let ingredients: Ingredients?
+    let food_pairing: [String]
+    let brewers_tips: String?
 
-//    let volume: BoilVolume?
-//    let boilVolume: BoilVolume?
-//    let method: Met?
-//    let metod: Met?
+    let volume: BoilVolume?
+    let boilVolume: BoilVolume?
+    let method: Met?
+    let metod: Met?
     
     static let example = Beer(id: 1,
                               name: "Buzz",
@@ -36,19 +36,25 @@ struct Beer: Identifiable, Codable, Hashable {
                               description: "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.",
                               image_url: "https://images.punkapi.com/v2/keg.png",
                               abv: 4.5,
-                              ibu: nil, targetFg: nil, targetOg: nil, ebc: nil, srm: nil, ph: nil, attenuationLevel: nil, foodPairing: nil, brewersTips: nil)
+                              ibu: nil,
+                              target_fg: nil,
+                              target_og: nil,
+                              ebc: nil,
+                              srm: nil,
+                              ph: nil,
+                              attenuationLevel: nil,
+                              ingredients: nil,
+                              food_pairing: [String](),
+                              brewers_tips: nil,
+                              volume: nil,
+                              boilVolume: nil,
+                              method: nil,
+                              metod: nil)
 }
 
 struct BoilVolume: Codable, Hashable {
     let value: Double
-    let unit: Unit
-}
-
-enum Unit: Codable, Hashable {
-    case celsius
-    case grams
-    case kilograms
-    case litres
+    let unit: String
 }
 
 struct Ingredients: Codable, Hashable {
@@ -60,22 +66,8 @@ struct Ingredients: Codable, Hashable {
 struct Hop: Codable, Hashable {
     let name: String
     let amount: BoilVolume
-    let add: Add
-    let attribute: Attribute
-}
-
-enum Add: Codable {
-    case dryHop
-    case end
-    case middle
-    case start
-}
-
-enum Attribute: Codable {
-    case aroma
-    case attributeFlavour
-    case bitter
-    case flavour
+    let add: String
+    let attribute: String
 }
 
 struct Malt: Codable, Hashable {
@@ -84,7 +76,7 @@ struct Malt: Codable, Hashable {
 }
 
 struct Met: Codable, Hashable {
-    let mashTemp: [MashTemp]
+    let mash_temp: [MashTemp]
     let fermentation: Fermentation
     let twist: String?
 }
