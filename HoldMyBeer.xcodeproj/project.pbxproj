@@ -13,6 +13,8 @@
 		45C07A562A10C8BE0058B3B9 /* SommelierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C07A552A10C8BE0058B3B9 /* SommelierView.swift */; };
 		45C07A582A10D0840058B3B9 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C07A572A10D0840058B3B9 /* SearchView.swift */; };
 		45C07A5A2A10F0A80058B3B9 /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C07A592A10F0A80058B3B9 /* AlertData.swift */; };
+		45C07A5E2A1101FC0058B3B9 /* Color+EBCColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C07A5D2A1101FC0058B3B9 /* Color+EBCColors.swift */; };
+		45C07A612A1109E00058B3B9 /* EBCScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C07A602A1109E00058B3B9 /* EBCScale.swift */; };
 		45CE97202A0F9681008EC77A /* BeerSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CE971F2A0F9681008EC77A /* BeerSearchView.swift */; };
 		45CE97222A0F997F008EC77A /* SearchParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CE97212A0F997F008EC77A /* SearchParameter.swift */; };
 		45CE97242A0FAB58008EC77A /* ABV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CE97232A0FAB58008EC77A /* ABV.swift */; };
@@ -39,6 +41,8 @@
 		45C07A552A10C8BE0058B3B9 /* SommelierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SommelierView.swift; sourceTree = "<group>"; };
 		45C07A572A10D0840058B3B9 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		45C07A592A10F0A80058B3B9 /* AlertData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
+		45C07A5D2A1101FC0058B3B9 /* Color+EBCColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+EBCColors.swift"; sourceTree = "<group>"; };
+		45C07A602A1109E00058B3B9 /* EBCScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBCScale.swift; sourceTree = "<group>"; };
 		45CE971F2A0F9681008EC77A /* BeerSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerSearchView.swift; sourceTree = "<group>"; };
 		45CE97212A0F997F008EC77A /* SearchParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParameter.swift; sourceTree = "<group>"; };
 		45CE97232A0FAB58008EC77A /* ABV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABV.swift; sourceTree = "<group>"; };
@@ -88,6 +92,14 @@
 				45CE97302A0FEB1D008EC77A /* BeerManager+NetworkCalls.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		45C07A5F2A1104760058B3B9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				45C07A5D2A1101FC0058B3B9 /* Color+EBCColors.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		45CE97292A0FB2D3008EC77A /* Protocol */ = {
@@ -141,6 +153,8 @@
 			children = (
 				45DB5E5B2A0EA49200CBE230 /* HoldMyBeerApp.swift */,
 				45DB5E5D2A0EA49200CBE230 /* ContentView.swift */,
+				45C07A602A1109E00058B3B9 /* EBCScale.swift */,
+				45C07A5F2A1104760058B3B9 /* Extensions */,
 				45CE97292A0FB2D3008EC77A /* Protocol */,
 				45DB5E6C2A0EA7E900CBE230 /* Model */,
 				452703572A0F89F300469098 /* View */,
@@ -259,6 +273,7 @@
 				45DB5E702A0EA8DA00CBE230 /* NetworkError.swift in Sources */,
 				45CE97312A0FEB1D008EC77A /* BeerManager+NetworkCalls.swift in Sources */,
 				45DB5E732A0EC12600CBE230 /* URLBuilder.swift in Sources */,
+				45C07A5E2A1101FC0058B3B9 /* Color+EBCColors.swift in Sources */,
 				45CE97222A0F997F008EC77A /* SearchParameter.swift in Sources */,
 				45C07A5A2A10F0A80058B3B9 /* AlertData.swift in Sources */,
 				45CE97282A0FB2BF008EC77A /* CommonProperties.swift in Sources */,
@@ -271,6 +286,7 @@
 				45CE97242A0FAB58008EC77A /* ABV.swift in Sources */,
 				45CE97262A0FAE0B008EC77A /* CommonPropertiesView.swift in Sources */,
 				4562F31B2A0ED7350056201B /* BeerManager.swift in Sources */,
+				45C07A612A1109E00058B3B9 /* EBCScale.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

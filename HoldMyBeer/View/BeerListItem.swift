@@ -33,6 +33,28 @@ struct BeerListItem: View {
                     .bold()
                 Text(beer.tagline)
                     .font(.callout)
+                
+                HStack {
+                    if let ebc = beer.ebc {
+                        Text("Color")
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                        RoundedRectangle(cornerRadius: 3)
+                            .strokeBorder(.secondary)
+                            .background(EBCScale.getColor(by: ebc))
+                            .frame(width: 15, height: 15, alignment: .center)
+                    }
+                    Spacer()
+                    Text("alc \(beer.abv, specifier: "%.1f") % vol.")
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                    Spacer()
+                    if let ibu = beer.ibu {
+                        Text("Bitterness \(ibu, specifier: "%.0f")/120")
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
+                }
             }
         }
     }

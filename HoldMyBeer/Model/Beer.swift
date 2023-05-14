@@ -9,7 +9,7 @@ struct Beer: Identifiable, Codable, Hashable {
     let id: Int
     let name: String
     let tagline: String
-    let firstBrewed: String?
+    let first_brewed: String?
     let description: String
     let image_url: String?
     let abv: Double
@@ -32,7 +32,7 @@ struct Beer: Identifiable, Codable, Hashable {
     static let example = Beer(id: 1,
                               name: "Buzz",
                               tagline: "A Real Bitter Experience.",
-                              firstBrewed: "09/2007",
+                              first_brewed: "09/2007",
                               description: "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.",
                               image_url: "https://images.punkapi.com/v2/keg.png",
                               abv: 4.5,
