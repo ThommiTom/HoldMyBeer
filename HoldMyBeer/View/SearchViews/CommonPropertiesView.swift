@@ -16,7 +16,7 @@ struct CommonPropertiesView: View {
     
     @State private var showAlert = false
     
-    let pickerChoice = [Inequality.greaterThan, Inequality.lessThan]
+    let pickerChoice: [Inequality] = [.greaterThan, .lessThan]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
@@ -59,7 +59,7 @@ struct CommonPropertiesView: View {
                         .padding(.top, 3)
                     
                     Picker("Inequality", selection: $common.inequality) {
-                        ForEach(pickerChoice, id: \.self) {
+                        ForEach(pickerChoice) {
                             Text($0.rawValue)
                         }
                     }

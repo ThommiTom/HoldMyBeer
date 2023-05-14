@@ -8,6 +8,17 @@
 import Foundation
 
 struct SearchParameter {
+    var selectedView: SearchViewOptions = .searchView
+    
+    var viewTitle: String {
+        switch selectedView {
+        case .searchView:
+            return "Search Parameter"
+        case .sommelierView:
+            return "Recommendation"
+        }
+    }
+    
     var beerName: String = ""
     
     var toggleBrewDate: Bool = false
@@ -48,13 +59,22 @@ struct SearchParameter {
     var hops: String = ""
     var malt: String = ""
     
-    let pickerChoice = [Inequality.greaterThan, Inequality.lessThan]
+    let inequalityChoice: [Inequality] = [.greaterThan, .lessThan]
+    let viewChoices: [SearchViewOptions] = [.searchView, .sommelierView]
 }
 
-enum Inequality: String {
+enum Inequality: String, Identifiable {
     case greaterThan = ">"
     case lessThan = "<"
+    
+    var id: Inequality { self }
 }
 
+enum SearchViewOptions: String, Identifiable {
+    case searchView = "Search"
+    case sommelierView = "Sommelier"
+    
+    var id: SearchViewOptions { self }
+}
 
 

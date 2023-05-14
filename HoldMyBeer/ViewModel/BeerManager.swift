@@ -11,7 +11,10 @@ class BeerManager: ObservableObject {
     @Published private(set) var beerCatalog: [Beer] = []
     @Published private(set) var searchedBeers: [Beer] = []
 
+    @Published var alertData = AlertData()
     @Published var isShowMoreButtonActive = true
+    
+    private(set) var viewTitle: String = ""
     
     private(set) var pageNo = 1
     let itemsPerPage = 50
@@ -20,12 +23,33 @@ class BeerManager: ObservableObject {
         beerCatalog.append(contentsOf: beers)
     }
     
-    func setSearched(_ beers: [Beer]) {
-        searchedBeers = beers
+    func process(new beers: [Beer]) {
+        if beers.isEmpty {
+            setAlert()
+            resetSearchResult()
+        } else {
+            setSearched(beers)
+        }
+    }
+    
+    private func setAlert() {
+        DispatchQueue.main.async {
+            self.alertData.title = "Oops..."
+            self.alertData.message = "Sorry, we couldn't find what you're looking for... 😕"
+            self.alertData.show = true
+        }
+    }
+    
+    private func setSearched(_ beers: [Beer]) {
+        DispatchQueue.main.async {
+            self.searchedBeers = beers
+        }
     }
     
     func resetSearchResult() {
-        searchedBeers.removeAll()
+        DispatchQueue.main.async {
+            self.searchedBeers.removeAll()
+        }
     }
     
     func incrementPageNo() {

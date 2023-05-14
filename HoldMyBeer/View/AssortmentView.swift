@@ -11,7 +11,6 @@ struct AssortmentView: View {
     @ObservedObject var beerManager: BeerManager
     
     @State private var showSheet = false
-    @State private var showingPopover = false
     
     var body: some View {
         NavigationStack {
@@ -22,17 +21,8 @@ struct AssortmentView: View {
                             BeerListItem(beer: $0)
                         }
                         
-                        if beerManager.isShowMoreButtonActive {
-                            HStack(alignment: .center) {
-                                Spacer()
-                                Button {
-                                    beerManager.getBeers()
-                                } label: {
-                                    Text("show more")
-                                        .font(.caption)
-                                }
-                                Spacer()
-                            }
+                        ShowMoreButton(showButton: $beerManager.isShowMoreButtonActive) {
+                            beerManager.getBeers()
                         }
                     }
                 } else {
@@ -65,7 +55,16 @@ struct AssortmentView: View {
                 }
             }
             .sheet(isPresented: $showSheet) {
-                BeerSearch(beerManager: beerManager)
+                SearchView {
+                    beerManager.searchBeers()
+                }
+            }
+            .alert(beerManager.alertData.title, isPresented: $beerManager.alertData.show) {
+                Button("OK") {}
+            } message: {
+                VStack {
+                    Text(beerManager.alertData.message)
+                }
             }
             .onAppear {
                 beerManager.getBeers()

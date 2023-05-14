@@ -7,18 +7,14 @@
 
 import SwiftUI
 
-struct BeerSearch: View {
-    @Environment(\.dismiss) var dismiss
-    @ObservedObject var beerManager: BeerManager
-    @State private var searchParameter = SearchParameter()
+struct BeerSearchView: View {
+    @Binding var searchParameter: SearchParameter
     
     var body: some View {
-        NavigationStack {
+        VStack {
             List {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Search for beer name")
-                        .foregroundColor(.primary)
-                        .opacity(0.8)
+                    Text("Search for...")
                     TextField("Beer Name", text: $searchParameter.beerName)
                         .onChange(of: searchParameter.beerName) { newValue in
                             if newValue.isEmpty {
@@ -43,7 +39,7 @@ struct BeerSearch: View {
                         GeometryReader { geometry in
                             HStack {
                                 Picker("Inequality", selection: $searchParameter.inequalitySelection) {
-                                    ForEach(searchParameter.pickerChoice, id: \.self) { Text($0.rawValue) }
+                                    ForEach(searchParameter.inequalityChoice) { Text($0.rawValue) }
                                 }
                                 .labelsHidden()
                                 .frame(maxWidth: geometry.size.width / 3)
@@ -82,30 +78,15 @@ struct BeerSearch: View {
                 CommonPropertiesView(common: EBC())
             }
             .listStyle(.plain)
-            .navigationTitle("Search Parameter")
-            
-            Spacer()
-
-            Button {
-                if let url = URLBuilder.shared.buildURL() {
-                    beerManager.searchBeers(url: url)
-                }
-                
-                dismiss()
-                searchParameter = SearchParameter()
-            } label: {
-                Text("search")
-                    .frame(maxWidth: .infinity)
-                    
-            }
-            .padding()
-            .buttonStyle(.borderedProminent)
+        }
+        .onAppear {
+            URLBuilder.shared.resetQueryItems()
         }
     }
 }
 
-struct BeerSearch_Previews: PreviewProvider {
+struct BeerSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        BeerSearch(beerManager: BeerManager())
+        BeerSearchView(searchParameter: Binding<SearchParameter>.constant(SearchParameter()))
     }
 }

@@ -92,6 +92,10 @@ class URLBuilder {
         return url
     }
     
+    func resetQueryItems() {
+        queryItems.removeAll()
+    }
+    
     func createPaginationURL(page: Int, itemsPerPage: Int) -> URL? {
         urlComponents.queryItems = [ URLQueryItem(name: "page", value: String(page)), URLQueryItem(name: "per_page", value: String(itemsPerPage))]
         let url = urlComponents.url
