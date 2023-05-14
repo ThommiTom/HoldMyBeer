@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct BeerSearchView: View {
-    @Environment(\.dismiss) var dismiss
     @Binding var searchParameter: SearchParameter
-    var searchBeers: () -> Void
     
     var body: some View {
         VStack {
@@ -80,20 +78,6 @@ struct BeerSearchView: View {
                 CommonPropertiesView(common: EBC())
             }
             .listStyle(.plain)
-            
-            Spacer()
-            
-            Button {
-                searchBeers()
-                dismiss()
-                searchParameter = SearchParameter()
-            } label: {
-                Text("Go for it!")
-                    .frame(maxWidth: .infinity)
-                    
-            }
-            .padding()
-            .buttonStyle(.borderedProminent)
         }
         .onAppear {
             URLBuilder.shared.resetQueryItems()
@@ -103,8 +87,6 @@ struct BeerSearchView: View {
 
 struct BeerSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        BeerSearchView(searchParameter: Binding<SearchParameter>.constant(SearchParameter())) {
-            print("search beers network call here")
-        }
+        BeerSearchView(searchParameter: Binding<SearchParameter>.constant(SearchParameter()))
     }
 }

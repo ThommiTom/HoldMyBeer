@@ -13,9 +13,7 @@ extension BeerManager {
             await NetworkManager.shared.networkCall(with: URLBuilder.shared.buildURL()) { (result: Result<[Beer], NetworkError>) in
                 switch result {
                 case .success(let beers):
-                    DispatchQueue.main.async {
-                        self.setSearched(beers)
-                    }
+                    self.process(new: beers)
                 case .failure(let error):
                     print(error)
                 }

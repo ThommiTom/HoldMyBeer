@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct SommelierView: View {
-    @Environment(\.dismiss) var dismiss
     @Binding var searchParameter: SearchParameter
-    var searchBeers: () -> Void
     
     var body: some View {
         VStack {
@@ -29,18 +27,6 @@ struct SommelierView: View {
                 })
                 .multilineTextAlignment(.center)
                 .padding()
-            
-            Spacer()
-            
-            Button {
-                searchBeers()
-                dismiss()
-                searchParameter = SearchParameter()
-            } label: {
-                Text("Recommend something!")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
         }
         .padding()
         .onAppear {
@@ -51,8 +37,6 @@ struct SommelierView: View {
 
 struct SommelierView_Previews: PreviewProvider {
     static var previews: some View {
-        SommelierView(searchParameter: Binding<SearchParameter>.constant(SearchParameter())) {
-            print("search beers network call here")
-        }
+        SommelierView(searchParameter: Binding<SearchParameter>.constant(SearchParameter()))
     }
 }

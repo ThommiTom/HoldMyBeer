@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SearchView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var beerManager: BeerManager
     @State private var searchParameter = SearchParameter()
+    var searchBeers: () -> Void
     
     var body: some View {
         NavigationStack {
@@ -23,22 +23,33 @@ struct SearchView: View {
             Group {
                 switch searchParameter.selectedView {
                 case .searchView:
-                    BeerSearchView(searchParameter: $searchParameter) {
-                        beerManager.searchBeers()
-                    }
+                    BeerSearchView(searchParameter: $searchParameter)
                 case .sommelierView:
-                    SommelierView(searchParameter: $searchParameter) {
-                        beerManager.searchBeers()
-                    }
+                    SommelierView(searchParameter: $searchParameter)
                 }
             }
             .navigationTitle(searchParameter.viewTitle)
+            
+            Spacer()
+            
+            Button {
+                searchBeers()
+                dismiss()
+            } label: {
+                Text(searchParameter.selectedView == .searchView ? "Go for it!" : "Recommend something!")
+                    .frame(maxWidth: .infinity)
+                    
+            }
+            .padding()
+            .buttonStyle(.borderedProminent)
         }
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(beerManager: BeerManager())
+        SearchView {
+            print("networkcall here")
+        }
     }
 }
