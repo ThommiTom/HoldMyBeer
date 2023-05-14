@@ -22,17 +22,8 @@ struct AssortmentView: View {
                             BeerListItem(beer: $0)
                         }
                         
-                        if beerManager.isShowMoreButtonActive {
-                            HStack(alignment: .center) {
-                                Spacer()
-                                Button {
-                                    beerManager.getBeers()
-                                } label: {
-                                    Text("show more")
-                                        .font(.caption)
-                                }
-                                Spacer()
-                            }
+                        ShowMoreButton(showButton: $beerManager.isShowMoreButtonActive) {
+                            beerManager.getBeers()
                         }
                     }
                 } else {

@@ -16,9 +16,7 @@ struct BeerSearch: View {
         NavigationStack {
             List {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Search for beer name")
-                        .foregroundColor(.primary)
-                        .opacity(0.8)
+                    Text("Search for...")
                     TextField("Beer Name", text: $searchParameter.beerName)
                         .onChange(of: searchParameter.beerName) { newValue in
                             if newValue.isEmpty {
