@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45158E712A114596009ABB14 /* ToBrewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E702A114596009ABB14 /* ToBrewsView.swift */; };
+		45158E732A1145A1009ABB14 /* RatedBrewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E722A1145A1009ABB14 /* RatedBrewsView.swift */; };
+		45158E752A1146E8009ABB14 /* FileManager+DocDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E742A1146E8009ABB14 /* FileManager+DocDirectory.swift */; };
+		45158E772A1147EE009ABB14 /* BrewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E762A1147EE009ABB14 /* BrewManager.swift */; };
+		45158E792A114E1B009ABB14 /* BeerManager+Sortings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E782A114E1B009ABB14 /* BeerManager+Sortings.swift */; };
 		452703562A0F89E900469098 /* AssortmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452703552A0F89E900469098 /* AssortmentView.swift */; };
 		4562F31B2A0ED7350056201B /* BeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562F31A2A0ED7350056201B /* BeerManager.swift */; };
 		45C07A542A10C2270058B3B9 /* ShowMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C07A532A10C2270058B3B9 /* ShowMoreButton.swift */; };
@@ -37,6 +42,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45158E702A114596009ABB14 /* ToBrewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToBrewsView.swift; sourceTree = "<group>"; };
+		45158E722A1145A1009ABB14 /* RatedBrewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatedBrewsView.swift; sourceTree = "<group>"; };
+		45158E742A1146E8009ABB14 /* FileManager+DocDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DocDirectory.swift"; sourceTree = "<group>"; };
+		45158E762A1147EE009ABB14 /* BrewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewManager.swift; sourceTree = "<group>"; };
+		45158E782A114E1B009ABB14 /* BeerManager+Sortings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeerManager+Sortings.swift"; sourceTree = "<group>"; };
 		452703552A0F89E900469098 /* AssortmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssortmentView.swift; sourceTree = "<group>"; };
 		4562F31A2A0ED7350056201B /* BeerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerManager.swift; sourceTree = "<group>"; };
 		45C07A532A10C2270058B3B9 /* ShowMoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreButton.swift; sourceTree = "<group>"; };
@@ -82,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				452703552A0F89E900469098 /* AssortmentView.swift */,
+				45158E702A114596009ABB14 /* ToBrewsView.swift */,
+				45158E722A1145A1009ABB14 /* RatedBrewsView.swift */,
 				45CE97322A0FED81008EC77A /* BeerListItem.swift */,
 				45C07A622A1112590058B3B9 /* BeerDetailView.swift */,
 				45C07A642A1122550058B3B9 /* IngredientsView.swift */,
@@ -96,6 +108,8 @@
 			children = (
 				4562F31A2A0ED7350056201B /* BeerManager.swift */,
 				45CE97302A0FEB1D008EC77A /* BeerManager+NetworkCalls.swift */,
+				45158E782A114E1B009ABB14 /* BeerManager+Sortings.swift */,
+				45158E762A1147EE009ABB14 /* BrewManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -104,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				45C07A5D2A1101FC0058B3B9 /* Color+EBCColors.swift */,
+				45158E742A1146E8009ABB14 /* FileManager+DocDirectory.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -282,17 +297,22 @@
 				45C07A5E2A1101FC0058B3B9 /* Color+EBCColors.swift in Sources */,
 				45CE97222A0F997F008EC77A /* SearchParameter.swift in Sources */,
 				45C07A5A2A10F0A80058B3B9 /* AlertData.swift in Sources */,
+				45158E792A114E1B009ABB14 /* BeerManager+Sortings.swift in Sources */,
 				45C07A632A1112590058B3B9 /* BeerDetailView.swift in Sources */,
 				45CE97282A0FB2BF008EC77A /* CommonProperties.swift in Sources */,
 				45CE97202A0F9681008EC77A /* BeerSearchView.swift in Sources */,
+				45158E712A114596009ABB14 /* ToBrewsView.swift in Sources */,
 				45C07A562A10C8BE0058B3B9 /* SommelierView.swift in Sources */,
 				45C07A542A10C2270058B3B9 /* ShowMoreButton.swift in Sources */,
 				452703562A0F89E900469098 /* AssortmentView.swift in Sources */,
 				45CE972B2A0FB2FD008EC77A /* IBU.swift in Sources */,
 				45CE97332A0FED81008EC77A /* BeerListItem.swift in Sources */,
 				45CE97242A0FAB58008EC77A /* ABV.swift in Sources */,
+				45158E752A1146E8009ABB14 /* FileManager+DocDirectory.swift in Sources */,
 				45CE97262A0FAE0B008EC77A /* CommonPropertiesView.swift in Sources */,
 				4562F31B2A0ED7350056201B /* BeerManager.swift in Sources */,
+				45158E772A1147EE009ABB14 /* BrewManager.swift in Sources */,
+				45158E732A1145A1009ABB14 /* RatedBrewsView.swift in Sources */,
 				45C07A612A1109E00058B3B9 /* EBCScale.swift in Sources */,
 				45C07A652A1122550058B3B9 /* IngredientsView.swift in Sources */,
 			);

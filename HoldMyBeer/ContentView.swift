@@ -11,7 +11,25 @@ struct ContentView: View {
     @StateObject var beerManager = BeerManager()
     
     var body: some View {
-        AssortmentView(beerManager: beerManager)
+        TabView {
+            AssortmentView(beerManager: beerManager)
+                .tabItem {
+                    Image(systemName: "list.clipboard")
+                    Text("Assortment")
+                }
+            
+            ToBrewsView()
+            .tabItem {
+                Image(systemName: "checklist")
+                Text("To Brews")
+            }
+            
+            RatedBrewsView()
+            .tabItem {
+                Image(systemName: "star")
+                Text("Rated Brews")
+            }
+        }
     }
 }
 

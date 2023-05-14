@@ -53,14 +53,14 @@ struct Beer: Identifiable, Codable, Hashable {
 }
 
 struct BoilVolume: Codable, Hashable {
-    let value: Double
+    let value: Double?
     let unit: String
 }
 
 struct Ingredients: Codable, Hashable {
     let malt: [Malt]
     let hops: [Hop]
-    let yeast: String
+    let yeast: String?
 }
 
 struct Hop: Codable, Hashable {
