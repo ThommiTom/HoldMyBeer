@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct BeerSearch: View {
+struct BeerSearchView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var beerManager: BeerManager
-    @State private var searchParameter = SearchParameter()
+    @Binding var searchParameter: SearchParameter
+    var searchBeers: () -> Void
     
     var body: some View {
-        NavigationStack {
+        VStack {
             List {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Search for...")
@@ -41,7 +41,7 @@ struct BeerSearch: View {
                         GeometryReader { geometry in
                             HStack {
                                 Picker("Inequality", selection: $searchParameter.inequalitySelection) {
-                                    ForEach(searchParameter.pickerChoice, id: \.self) { Text($0.rawValue) }
+                                    ForEach(searchParameter.inequalityChoice) { Text($0.rawValue) }
                                 }
                                 .labelsHidden()
                                 .frame(maxWidth: geometry.size.width / 3)
@@ -80,30 +80,31 @@ struct BeerSearch: View {
                 CommonPropertiesView(common: EBC())
             }
             .listStyle(.plain)
-            .navigationTitle("Search Parameter")
             
             Spacer()
-
+            
             Button {
-                if let url = URLBuilder.shared.buildURL() {
-                    beerManager.searchBeers(url: url)
-                }
-                
+                searchBeers()
                 dismiss()
                 searchParameter = SearchParameter()
             } label: {
-                Text("search")
+                Text("Go for it!")
                     .frame(maxWidth: .infinity)
                     
             }
             .padding()
             .buttonStyle(.borderedProminent)
         }
+        .onAppear {
+            URLBuilder.shared.resetQueryItems()
+        }
     }
 }
 
-struct BeerSearch_Previews: PreviewProvider {
+struct BeerSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        BeerSearch(beerManager: BeerManager())
+        BeerSearchView(searchParameter: Binding<SearchParameter>.constant(SearchParameter())) {
+            print("search beers network call here")
+        }
     }
 }

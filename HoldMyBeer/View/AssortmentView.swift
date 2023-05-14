@@ -56,7 +56,7 @@ struct AssortmentView: View {
                 }
             }
             .sheet(isPresented: $showSheet) {
-                BeerSearch(beerManager: beerManager)
+                SearchView(beerManager: BeerManager())
             }
             .onAppear {
                 beerManager.getBeers()

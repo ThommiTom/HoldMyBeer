@@ -8,9 +8,9 @@
 import Foundation
 
 extension BeerManager {
-    func searchBeers(url: URL?) {
+    func searchBeers() {
         Task {
-            await NetworkManager.shared.networkCall(with: url) { (result: Result<[Beer], NetworkError>) in
+            await NetworkManager.shared.networkCall(with: URLBuilder.shared.buildURL()) { (result: Result<[Beer], NetworkError>) in
                 switch result {
                 case .success(let beers):
                     DispatchQueue.main.async {

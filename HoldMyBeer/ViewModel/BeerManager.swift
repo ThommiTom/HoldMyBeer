@@ -13,6 +13,8 @@ class BeerManager: ObservableObject {
 
     @Published var isShowMoreButtonActive = true
     
+    private(set) var viewTitle: String = ""
+    
     private(set) var pageNo = 1
     let itemsPerPage = 50
     
