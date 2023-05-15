@@ -37,7 +37,7 @@ struct BrewView: View {
                 if let nextStep = brewManager.showNextStep(for: index) {
                     NavigationLink(value: brewManager.brews[index].steps.stepsToDo) {
                         VStack(alignment: .leading, spacing: 15) {
-                            Text("Next Step")
+                            Text("Next step")
                                 .font(.callout)
                                 .foregroundColor(.secondary)
                             Text(nextStep)
@@ -50,7 +50,7 @@ struct BrewView: View {
                 // current step
                 if brewManager.brews[index].progress < 100.0 {
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Current Step")
+                        Text("Current step")
                             .font(.callout)
                             .foregroundColor(.secondary)
                         HStack(spacing: 20) {
@@ -79,7 +79,7 @@ struct BrewView: View {
                 if let lastDoneStep = brewManager.showLastDoneStep(for: index) {
                     NavigationLink(value: brewManager.brews[index].steps.doneSteps) {
                         VStack(alignment: .leading, spacing: 15) {
-                            Text("finished steps")
+                            Text("Finished steps")
                                 .font(.callout)
                                 .foregroundColor(.secondary)
                             Text(lastDoneStep)

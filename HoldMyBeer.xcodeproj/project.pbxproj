@@ -257,6 +257,8 @@
 				45158E702A114596009ABB14 /* ToBrewsView.swift */,
 				45FFCE952A11F33900D7F3A2 /* BrewView.swift */,
 				45FFCE992A11FC8D00D7F3A2 /* EmptyBrewView.swift */,
+				45BEF1C72A12BFDA008F9926 /* InstructionListView.swift */,
+				45BEF1C92A12C3E5008F9926 /* BrewListItem.swift */,
 				45BEF1CF2A12C9D2008F9926 /* RatingView.swift */,
 				45BEF1CD2A12C94D008F9926 /* StarRatingView.swift */,
 			);
@@ -279,8 +281,6 @@
 			children = (
 				45158E762A1147EE009ABB14 /* BrewManager.swift */,
 				45BEF1C02A12889F008F9926 /* BrewManager+Instructions.swift */,
-				45BEF1C72A12BFDA008F9926 /* InstructionListView.swift */,
-				45BEF1C92A12C3E5008F9926 /* BrewListItem.swift */,
 			);
 			path = BrewManager;
 			sourceTree = "<group>";
