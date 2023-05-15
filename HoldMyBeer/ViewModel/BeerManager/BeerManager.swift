@@ -14,7 +14,7 @@ class BeerManager: ObservableObject {
     @Published var alertData = AlertData()
     @Published var isShowMoreButtonActive = true
     
-    @Published private(set) var addedToBrew: Set<Int> = []
+    @Published private(set) var beersToBrew = [Int]()
     
     @Published var sorting: BeerSorting = .none
     
@@ -31,20 +31,12 @@ class BeerManager: ObservableObject {
         beerCatalog.append(contentsOf: beers)
     }
     
-    func process(new beers: [Beer]) {
+    func processSearched(new beers: [Beer]) {
         if beers.isEmpty {
             setAlert()
             resetSearchResult()
         } else {
             setSearched(beers)
-        }
-    }
-    
-    private func setAlert() {
-        DispatchQueue.main.async {
-            self.alertData.title = "Oops..."
-            self.alertData.message = "Sorry, we couldn't find what you're looking for... 😕"
-            self.alertData.show = true
         }
     }
     
@@ -65,9 +57,25 @@ class BeerManager: ObservableObject {
     }
     
     func addToBrews(id: Int) {
-        if !addedToBrew.contains(id) {
-            print("inserting")
-            addedToBrew.insert(id)
+        if !beersToBrew.contains(id) {
+            beersToBrew.append(id)
+        }
+    }
+    
+    func containedInToBrew(id: Int) -> Bool {
+        beersToBrew.contains(id)
+    }
+    
+    func saveBeerToBrews(_ beer: Beer) {
+        Persistence.shared.saveBeerToBrew(beer)
+    }
+    
+    func loadBeersToBrew() {
+        let loaded = Persistence.shared.loadBeersToBrew()
+        
+        beersToBrew.removeAll()
+        for item in loaded {
+            beersToBrew.append(item.id)
         }
     }
 }

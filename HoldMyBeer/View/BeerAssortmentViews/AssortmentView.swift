@@ -14,21 +14,29 @@ struct AssortmentView: View {
     
     var body: some View {
         NavigationStack {
+            HStack(spacing: 20) {
+                Image(systemName: "arrow.right")
+                Text("Swipe right to add beer to \'To Brews\'")
+                Image(systemName: "arrow.right")
+            }
+            .font(.caption)
+            .bold()
+            .foregroundColor(.blue)
             Group {
                 if beerManager.searchedBeers.isEmpty {
                     List {
                         ForEach(beerManager.sortedBeers) { beer in
                             NavigationLink(value: beer) {
-                                BeerListItem(beer: beer)
+                                BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
                                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        if !beerManager.addedToBrew.contains(beer.id) {
+                                        if !beerManager.beersToBrew.contains(beer.id) {
                                             Button {
                                                 beerManager.addToBrews(id: beer.id)
-                                                // TODO: Save beer for ToBrew
+                                                beerManager.saveBeerToBrews(beer)
                                             } label: {
-                                                Label("add to\nTo Brews", systemImage: "checklist")
+                                                Label("add to\n\'To Brews\'", systemImage: "checklist")
                                             }
-                                            .tint(.green)
+                                            .tint(.blue)
                                         }
                                     }
                             }
@@ -42,16 +50,16 @@ struct AssortmentView: View {
                     List {
                         ForEach(beerManager.sortedSearchedBeers) { beer in
                             NavigationLink(value: beer) {
-                                BeerListItem(beer: beer)
+                                BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
                                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        if !beerManager.addedToBrew.contains(beer.id) {
+                                        if !beerManager.beersToBrew.contains(beer.id) {
                                             Button {
                                                 beerManager.addToBrews(id: beer.id)
-                                                // TODO: Save beer for ToBrew
+                                                beerManager.saveBeerToBrews(beer)
                                             } label: {
-                                                Label("add to\nTo Brews", systemImage: "checklist")
+                                                Label("add to\n\'To Brews\'", systemImage: "checklist")
                                             }
-                                            .tint(.green)
+                                            .tint(.blue)
                                         }
                                     }
                             }
@@ -76,16 +84,16 @@ struct AssortmentView: View {
                 }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Image(systemName: "arrow.up.arrow.down")
-                        .foregroundColor(.blue)
-                        .contextMenu {
-                            ForEach(BeerSorting.allCases) { sortCase in
-                                Button(sortCase.rawValue) {
-                                    self.beerManager.sorting = sortCase
-                                }
+                    Menu {
+                        ForEach(BeerSorting.allCases) { sortCase in
+                            Button(sortCase.rawValue) {
+                                self.beerManager.sorting = sortCase
                             }
                         }
-                    
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+
                     Button {
                         showSheet = true
                     } label: {
@@ -97,6 +105,9 @@ struct AssortmentView: View {
                 SearchView {
                     beerManager.searchBeers()
                 }
+            }
+            .onAppear {
+                beerManager.loadBeersToBrew()
             }
             .alert(beerManager.alertData.title, isPresented: $beerManager.alertData.show) {
                 Button("OK") {}
