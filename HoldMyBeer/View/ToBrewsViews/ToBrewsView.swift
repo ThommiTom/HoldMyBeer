@@ -19,7 +19,7 @@ struct ToBrewsView: View {
                     List {
                         ForEach(brewManager.brews) { brew in
                             NavigationLink(value: brew) {
-                                BeerListItem(beer: brew.beer)
+                                BrewListItem(brew: brew)
                             }
                         }
                         .onDelete(perform: brewManager.removeBrew)

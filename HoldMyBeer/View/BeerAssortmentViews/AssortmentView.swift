@@ -14,6 +14,14 @@ struct AssortmentView: View {
     
     var body: some View {
         NavigationStack {
+            HStack(spacing: 20) {
+                Image(systemName: "arrow.right")
+                Text("Swipe right to add beer to \'To Brews\'")
+                Image(systemName: "arrow.right")
+            }
+            .font(.caption)
+            .bold()
+            .foregroundColor(.blue)
             Group {
                 if beerManager.searchedBeers.isEmpty {
                     List {

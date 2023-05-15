@@ -67,7 +67,8 @@ class BrewManager: ObservableObject {
         if let index = brews.firstIndex(where: { $0.id == beer.id }) {
             return index
         }
-        
+
+        // should never happen, unless there is a fundamental bug
         fatalError("[FATAL ERROR] index out of bound!")
     }
     
@@ -81,6 +82,8 @@ class BrewManager: ObservableObject {
             brews[index].steps.doneSteps.append(brews[index].steps.currentStep)
             brews[index].steps.currentStep = ""
         }
+        
+        saveBrew()
     }
     
     func showCurrnetStep(for index: Int) -> String {
@@ -93,5 +96,10 @@ class BrewManager: ObservableObject {
     
     func showLastDoneStep(for index: Int) -> String? {
         return brews[index].steps.doneSteps.last
+    }
+    
+    func saveRating(_ rating: Rating, for index: Int) {
+        brews[index].rating = rating
+        saveBrew()
     }
 }

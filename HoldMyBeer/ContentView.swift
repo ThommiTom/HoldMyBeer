@@ -24,12 +24,6 @@ struct ContentView: View {
                 Image(systemName: "checklist")
                 Text("\'To Brews\'")
             }
-            
-            RatedBrewsView()
-            .tabItem {
-                Image(systemName: "star")
-                Text("Rated Brews")
-            }
         }
     }
 }

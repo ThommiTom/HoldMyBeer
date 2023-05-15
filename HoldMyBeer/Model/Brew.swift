@@ -11,6 +11,7 @@ struct Brew: Identifiable, Hashable, Codable {
     var id: Int { beer.id }
     var beer: Beer
     var steps: Instruction
+    var rating: Rating?
     
     var doneCount: Double {
         Double(steps.doneSteps.count)
@@ -21,12 +22,7 @@ struct Brew: Identifiable, Hashable, Codable {
     }
     
     var progress: Double {
-        print("doneCount \(doneCount)")
-        print("totalCount \(totalCount)")
-        print("Double(doneCount / totalCount) \(Double(doneCount / totalCount))")
-        let progress = Double(doneCount / totalCount) * 100.0
-        print(progress)
-        return progress
+        Double(doneCount / totalCount) * 100.0
     }
     
     var brewDone: Bool {
