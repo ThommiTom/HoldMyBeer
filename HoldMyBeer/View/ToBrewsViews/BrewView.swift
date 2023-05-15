@@ -8,62 +8,91 @@
 import SwiftUI
 
 struct BrewView: View {
-    var brew: Brew
+    @ObservedObject var brewManager: BrewManager
+    var index: Int
     
     var body: some View {
-        List {
-            BeerListItem(beer: brew.beer)
-            NavigationLink(value: brew.beer) {
-                Text("Take a closer look")
+        VStack {
+            Group {
+                NavigationLink(value: brewManager.brews[index].beer) {
+                    HStack {
+                        BeerListItem(beer: brewManager.brews[index].beer)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                    }
+                }
+                .buttonStyle(.plain)
+                
+                ProgressView("Brew Progress", value: brewManager.brews[index].progress, total: 100.0)
+                    .tint(brewManager.brews[index].beer.ebc != nil ? EBCScale.getColor(by: brewManager.brews[index].beer.ebc!) : .blue)
+                    .padding()
             }
+            .padding(.horizontal)
             
-            Section {
-                Text("Show current step in brew process")
-                    .bold()
+            List {
+                // current step
+                Section {
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text("Swipe left to mark as done")
+                            .font(.caption)
+                            .bold()
+                            .foregroundColor(.green)
+                        Text(brewManager.showCurrnetStep(for: index))
+                            .bold()
+                    }
                     .swipeActions {
                         Button {
-                            print("will mark this as done and mark first todo as in progress")
+                            brewManager.nextStepForBrew(with: index)
                         } label: {
                             Image(systemName: "checkmark.circle")
                         }
                         .tint(.green)
                     }
-            } header: {
-                Text(ProgressState.inProgress.rawValue)
-            } footer: {
-                Label("swipe to mark as done", systemImage: "info.circle.fill")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            .padding(.vertical)
+                } header: {
+                    Text("Current Step")
+                }
+                
+                .padding(.vertical)
 
-            Section {
-                Text("Shows next steps in brew process")
-                    .font(.callout)
-            } header: {
-                Text("NEXT \(ProgressState.toDo.rawValue)")
+                // next steps
+                if let nextStep = brewManager.showNextStep(for: index) {
+                    Section {
+                        Text(nextStep)
+                            .font(.callout)
+                    } header: {
+                        Text("Next Step")
+                    }
+                    .padding(.vertical)
+                }
+                
+                // done steps
+                if let lastDoneStep = brewManager.showLastDoneStep(for: index) {
+                    Section {
+                        Text(lastDoneStep)
+                            .font(.callout)
+                            .opacity(0.7)
+                    } header: {
+                        Text("finished steps")
+                    }
+                    .padding(.vertical)
+                }
+                
             }
-            .padding(.vertical)
-
-            Section {
-                Text("shows last step which has been done")
-                    .font(.callout)
-                    .opacity(0.7)
-            } header: {
-                Text(ProgressState.done.rawValue)
-            }
-            .padding(.vertical)
+            .listStyle(.plain)
         }
-        .listStyle(.plain)
-        .navigationTitle("Brew Progress")
+        .navigationTitle("Brew Progress \(brewManager.brews[index].progress, specifier: "%.1f") %")
         .navigationDestination(for: Beer.self) { beer in
             BeerDetailView(beer: beer)
         }
     }
 }
 
-struct BrewView_Previews: PreviewProvider {
-    static var previews: some View {
-        BrewView(brew: Brew.example)
-    }
-}
+
+// Preview Does not work du to index and fatal error
+
+//struct BrewView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BrewView(brewManager: BrewManager(), index: 0)
+//    }
+//}

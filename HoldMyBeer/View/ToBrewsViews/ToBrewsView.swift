@@ -29,7 +29,7 @@ struct ToBrewsView: View {
             }
             .navigationTitle("\'To Brews\' (To Dos)")
             .navigationDestination(for: Brew.self) { brew in
-                BrewView(brew: brew)
+                BrewView(brewManager: brewManager, index: brewManager.getIndexOf(brew.beer))
             }
         }
         .onAppear {

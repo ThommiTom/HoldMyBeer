@@ -21,7 +21,7 @@ struct AssortmentView: View {
                             NavigationLink(value: beer) {
                                 BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
                                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        if !beerManager.addedToBrew.contains(beer.id) {
+                                        if !beerManager.beersToBrew.contains(beer.id) {
                                             Button {
                                                 beerManager.addToBrews(id: beer.id)
                                                 beerManager.saveBeerToBrews(beer)
@@ -44,7 +44,7 @@ struct AssortmentView: View {
                             NavigationLink(value: beer) {
                                 BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
                                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        if !beerManager.addedToBrew.contains(beer.id) {
+                                        if !beerManager.beersToBrew.contains(beer.id) {
                                             Button {
                                                 beerManager.addToBrews(id: beer.id)
                                                 beerManager.saveBeerToBrews(beer)

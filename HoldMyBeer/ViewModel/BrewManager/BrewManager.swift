@@ -16,31 +16,45 @@ class BrewManager: ObservableObject {
         load()
     }
     
+    var currentStep: String {
+        return ""
+    }
+    
     func load() {
         loadBeers()
         loadBrews()
-        for beer in beers {
-            if !brews.contains(where: { $0.id == beer.id }) {
-                brews.append(Brew(beer: beer, process: [Instruction]()))
-            }
-        }
+        updateBrewsWithNewBeers()
         saveBrew()
     }
     
-    func saveBrew() {
-        Persistence.shared.saveBrews(brews)
+    
+    private func loadBeers() {
+        beers =  Persistence.shared.loadBeersToBrew()
     }
     
     private func loadBrews() {
         brews = Persistence.shared.loadBrews()
     }
     
+    func updateBrewsWithNewBeers() {
+        for beer in beers {
+            if !brews.contains(where: { $0.id == beer.id }) {
+                brews.append(Brew(beer: beer, steps: self.setBrewInstructionsMockUp()))
+            }
+        }
+    }
+    
     func saveBeers() {
         Persistence.shared.saveBeersToBrew(beers)
     }
     
-    private func loadBeers() {
-        beers =  Persistence.shared.loadBeersToBrew()
+    func saveBrew() {
+        Persistence.shared.saveBrews(brews)
+    }
+    
+    func removeBeer(at offsets: IndexSet) {
+        beers.remove(atOffsets: offsets)
+        saveBeers()
     }
     
     func removeBrew(at offsets: IndexSet) {
@@ -49,8 +63,35 @@ class BrewManager: ObservableObject {
         removeBeer(at: offsets)
     }
     
-    func removeBeer(at offsets: IndexSet) {
-        beers.remove(atOffsets: offsets)
-        saveBeers()
+    func getIndexOf(_ beer: Beer) -> Int {
+        if let index = brews.firstIndex(where: { $0.id == beer.id }) {
+            return index
+        }
+        
+        fatalError("[FATAL ERROR] index out of bound!")
+    }
+    
+    func nextStepForBrew(with index: Int) {
+        if !brews[index].steps.stepsToDo.isEmpty {
+            // we have some step to do
+            brews[index].steps.doneSteps.append(brews[index].steps.currentStep)
+            brews[index].steps.currentStep = brews[index].steps.stepsToDo.first!
+            brews[index].steps.stepsToDo.removeFirst()
+        } else if !brews[index].steps.currentStep.isEmpty {
+            brews[index].steps.doneSteps.append(brews[index].steps.currentStep)
+            brews[index].steps.currentStep = ""
+        }
+    }
+    
+    func showCurrnetStep(for index: Int) -> String {
+        return brews[index].steps.currentStep
+    }
+    
+    func showNextStep(for index: Int) -> String? {
+        return brews[index].steps.stepsToDo.first
+    }
+    
+    func showLastDoneStep(for index: Int) -> String? {
+        return brews[index].steps.doneSteps.last
     }
 }

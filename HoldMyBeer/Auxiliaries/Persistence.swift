@@ -21,8 +21,7 @@ class Persistence {
     fileprivate let brewsPath = FileManager.documentDirectory.appendingPathComponent("brews")
     
     
-    // MARK: funcs for beers to brew
-    func saveBeersToBrew(_ beer: Beer) {
+    func saveBeerToBrew(_ beer: Beer) {
         if !savedBeersToBrew.contains(where: { $0.id == beer.id }) {
             savedBeersToBrew.append(beer)
             FileManager().save(item: savedBeersToBrew, location: beersToBrewPath)

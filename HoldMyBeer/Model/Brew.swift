@@ -10,19 +10,34 @@ import Foundation
 struct Brew: Identifiable, Hashable, Codable {
     var id: Int { beer.id }
     var beer: Beer
-    var process: [Instruction]
+    var steps: Instruction
     
-    static var example = Brew(beer: .example, process: [Instruction]())
+    var doneCount: Double {
+        Double(steps.doneSteps.count)
+    }
+    
+    var totalCount: Double {
+        Double(steps.doneSteps.count + (steps.currentStep.isEmpty ? 0 : 1) + steps.stepsToDo.count)
+    }
+    
+    var progress: Double {
+        print("doneCount \(doneCount)")
+        print("totalCount \(totalCount)")
+        print("Double(doneCount / totalCount) \(Double(doneCount / totalCount))")
+        let progress = Double(doneCount / totalCount) * 100.0
+        print(progress)
+        return progress
+    }
+    
+    var brewDone: Bool {
+        doneCount == totalCount
+    }
+    
+    static var example = Brew(beer: .example, steps: Instruction())
 }
 
 struct Instruction: Hashable, Codable {
-    var stepDone: Date?
-    var instruction: String
-    var state: ProgressState
-}
-
-enum ProgressState: String, Hashable, Codable {
-    case toDo = "TO DO"
-    case inProgress = "IN PROGRESS"
-    case done = "DONE"
+    var stepsToDo: [String] = []
+    var currentStep: String = ""
+    var doneSteps: [String] = []
 }

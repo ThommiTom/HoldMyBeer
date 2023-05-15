@@ -13,7 +13,7 @@ extension BeerManager {
             await NetworkManager.shared.networkCall(with: URLBuilder.shared.buildURL()) { (result: Result<[Beer], NetworkError>) in
                 switch result {
                 case .success(let beers):
-                    self.process(new: beers)
+                    self.processSearched(new: beers)
                 case .failure(let error):
                     self.setErrorAlert(with: error)
                 }
