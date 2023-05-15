@@ -22,7 +22,7 @@ struct ContentView: View {
             ToBrewsView(brewManager: brewManager)
             .tabItem {
                 Image(systemName: "checklist")
-                Text("To Brews")
+                Text("\'To Brews\'")
             }
             
             RatedBrewsView()

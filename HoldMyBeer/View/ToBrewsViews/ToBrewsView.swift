@@ -13,28 +13,27 @@ struct ToBrewsView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if brewManager.beers.isEmpty {
-                    VStack {
-                        Text("No beers to brew!")
-                    }
+                if brewManager.brews.isEmpty {
+                    EmptyBrewView()
                 } else {
                     List {
-                        ForEach(brewManager.beers) { beer in
-//                            NavigationLink(value: beer) {
-//                                BeerListItem(beer: beer)
-//                            }
-                            BeerListItem(beer: beer)
+                        ForEach(brewManager.brews) { brew in
+                            NavigationLink(value: brew) {
+                                BeerListItem(beer: brew.beer)
+                            }
                         }
-                        .onDelete(perform: brewManager.removeBeer)
-                        
+                        .onDelete(perform: brewManager.removeBrew)
                     }
                     .listStyle(.plain)
                 }
             }
             .navigationTitle("\'To Brews\' (To Dos)")
+            .navigationDestination(for: Brew.self) { brew in
+                BrewView(brew: brew)
+            }
         }
         .onAppear {
-            brewManager.loadBeers()
+            brewManager.load()
         }
     }
 }

@@ -48,6 +48,14 @@ class BeerManager: ObservableObject {
         }
     }
     
+    func setErrorAlert(with error: NetworkError) {
+        DispatchQueue.main.async {
+            self.alertData.title = "Oops..."
+            self.alertData.message = "Sorry, something went horrobly wrong... 😔\n\(error.rawValue) 😪"
+            self.alertData.show = true
+        }
+    }
+    
     private func setSearched(_ beers: [Beer]) {
         DispatchQueue.main.async {
             self.searchedBeers = beers

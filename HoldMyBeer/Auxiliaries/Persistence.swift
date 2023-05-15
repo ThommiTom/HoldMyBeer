@@ -14,9 +14,14 @@ class Persistence {
         self.savedBeersToBrew = self.loadBeersToBrew()
     }
     
+    
     fileprivate let beersToBrewPath = FileManager.documentDirectory.appendingPathComponent("beerToBrew")
     private var savedBeersToBrew = [Beer]()
     
+    fileprivate let brewsPath = FileManager.documentDirectory.appendingPathComponent("brews")
+    
+    
+    // MARK: funcs for beers to brew
     func saveBeersToBrew(_ beer: Beer) {
         if !savedBeersToBrew.contains(where: { $0.id == beer.id }) {
             savedBeersToBrew.append(beer)
@@ -35,5 +40,18 @@ class Persistence {
         }
         
         return [Beer]()
+    }
+    
+    
+    // MARK: funcs for brews
+    func saveBrews(_ brews: [Brew]) {
+        FileManager().save(item: brews, location: brewsPath)
+    }
+    
+    func loadBrews() -> [Brew] {
+        if let loadedBrews: [Brew] = FileManager().load(location: brewsPath) {
+            return loadedBrews
+        }
+        return [Brew]()
     }
 }

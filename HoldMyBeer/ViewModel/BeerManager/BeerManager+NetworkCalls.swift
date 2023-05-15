@@ -15,7 +15,7 @@ extension BeerManager {
                 case .success(let beers):
                     self.process(new: beers)
                 case .failure(let error):
-                    print(error)
+                    self.setErrorAlert(with: error)
                 }
             }
         }
@@ -41,7 +41,7 @@ extension BeerManager {
                         }
                     }
                 case .failure(let error):
-                    print(error)
+                    self.setErrorAlert(with: error)
                 }
             }
         }

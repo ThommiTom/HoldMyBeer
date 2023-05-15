@@ -31,7 +31,7 @@ struct BeerListItem: View {
             }
             
             VStack(alignment: .leading, spacing: 10) {
-                Text("contained in To Brew 🍺")
+                Text("🍺 \'To Brews\' 🍺")
                     .foregroundColor(.secondary)
                     .font(.caption)
                     .opacity(containedInToBrew ? 1 : 0)

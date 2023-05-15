@@ -76,16 +76,16 @@ struct AssortmentView: View {
                 }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Image(systemName: "arrow.up.arrow.down")
-                        .foregroundColor(.blue)
-                        .contextMenu {
-                            ForEach(BeerSorting.allCases) { sortCase in
-                                Button(sortCase.rawValue) {
-                                    self.beerManager.sorting = sortCase
-                                }
+                    Menu {
+                        ForEach(BeerSorting.allCases) { sortCase in
+                            Button(sortCase.rawValue) {
+                                self.beerManager.sorting = sortCase
                             }
                         }
-                    
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+
                     Button {
                         showSheet = true
                     } label: {

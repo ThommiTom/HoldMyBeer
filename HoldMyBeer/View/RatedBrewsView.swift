@@ -10,8 +10,15 @@ import SwiftUI
 struct RatedBrewsView: View {
     var body: some View {
         NavigationStack {
-            Text("TODO")
-                .navigationTitle("Rated Brews")
+            VStack(spacing: 25) {
+                Text("No beers rated so far!")
+                    .font(.largeTitle)
+                    .bold()
+                Text("Brew beer! Drink beer! Rate beer!")
+                    .font(.callout)
+                    .foregroundColor(.secondary)
+            }
+            .navigationTitle("Rated Brews")
         }
         .onAppear {
             // TODO: load to brews beers
