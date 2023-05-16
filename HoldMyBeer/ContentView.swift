@@ -16,7 +16,7 @@ struct ContentView: View {
                     Text("Beers")
                 }
             
-            BrewsView()
+            BrewListView()
             .tabItem {
                 Image(systemName: "checklist")
                 Text("Brews")

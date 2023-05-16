@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45158E712A114596009ABB14 /* BrewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E702A114596009ABB14 /* BrewsView.swift */; };
+		45158E712A114596009ABB14 /* BrewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E702A114596009ABB14 /* BrewListView.swift */; };
 		45158E772A1147EE009ABB14 /* BrewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E762A1147EE009ABB14 /* BrewManager.swift */; };
 		45158E792A114E1B009ABB14 /* BeerManager+Sortings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E782A114E1B009ABB14 /* BeerManager+Sortings.swift */; };
 		45158E7B2A115BAE009ABB14 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45158E7A2A115BAE009ABB14 /* Persistence.swift */; };
@@ -52,7 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		45158E702A114596009ABB14 /* BrewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewsView.swift; sourceTree = "<group>"; };
+		45158E702A114596009ABB14 /* BrewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewListView.swift; sourceTree = "<group>"; };
 		45158E762A1147EE009ABB14 /* BrewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewManager.swift; sourceTree = "<group>"; };
 		45158E782A114E1B009ABB14 /* BeerManager+Sortings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeerManager+Sortings.swift"; sourceTree = "<group>"; };
 		45158E7A2A115BAE009ABB14 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 		45FFCE912A11F2AF00D7F3A2 /* BrewViews */ = {
 			isa = PBXGroup;
 			children = (
-				45158E702A114596009ABB14 /* BrewsView.swift */,
+				45158E702A114596009ABB14 /* BrewListView.swift */,
 				45FFCE952A11F33900D7F3A2 /* BrewView.swift */,
 				45FFCE992A11FC8D00D7F3A2 /* EmptyBrewView.swift */,
 				45BEF1C72A12BFDA008F9926 /* InstructionListView.swift */,
@@ -378,7 +378,7 @@
 				45C07A632A1112590058B3B9 /* BeerDetailView.swift in Sources */,
 				45CE97282A0FB2BF008EC77A /* CommonProperties.swift in Sources */,
 				45CE97202A0F9681008EC77A /* BeerSearchView.swift in Sources */,
-				45158E712A114596009ABB14 /* BrewsView.swift in Sources */,
+				45158E712A114596009ABB14 /* BrewListView.swift in Sources */,
 				45C07A562A10C8BE0058B3B9 /* SommelierView.swift in Sources */,
 				45C07A542A10C2270058B3B9 /* ShowMoreButton.swift in Sources */,
 				452703562A0F89E900469098 /* BeerCatalogView.swift in Sources */,

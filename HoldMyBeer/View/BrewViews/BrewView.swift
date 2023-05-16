@@ -23,6 +23,7 @@ struct BrewView: View {
                         Image(systemName: "chevron.right")
                             .foregroundColor(.gray)
                     }
+                    .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
                 

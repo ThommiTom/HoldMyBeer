@@ -1,5 +1,5 @@
 //
-//  BrewsView.swift
+//  BrewListView.swift
 //  HoldMyBeer
 //
 //  Created by Thomas Schatton on 14.05.23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BrewsView: View {
+struct BrewListView: View {
     @StateObject var brewManager = BrewManager()
     
     var body: some View {
@@ -38,8 +38,8 @@ struct BrewsView: View {
     }
 }
 
-struct BrewsView_Previews: PreviewProvider {
+struct BrewListView_Previews: PreviewProvider {
     static var previews: some View {
-        BrewsView(brewManager: BrewManager())
+        BrewListView(brewManager: BrewManager())
     }
 }
