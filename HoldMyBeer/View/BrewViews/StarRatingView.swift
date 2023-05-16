@@ -1,5 +1,5 @@
 //
-//  RatingView.swift
+//  StarRatingView.swift
 //  HoldMyBeer
 //
 //  Created by Thomas Schatton on 15.05.23.

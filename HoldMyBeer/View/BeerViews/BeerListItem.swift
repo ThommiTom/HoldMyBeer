@@ -1,5 +1,5 @@
 //
-//  AsyncImageView.swift
+//  BeerListItem.swift
 //  HoldMyBeer
 //
 //  Created by Thomas Schatton on 13.05.23.
@@ -31,7 +31,7 @@ struct BeerListItem: View {
             }
             
             VStack(alignment: .leading, spacing: 10) {
-                Text("🍺 \'To Brews\' 🍺")
+                Text("🍺 added to Brews")
                     .foregroundColor(.secondary)
                     .font(.caption)
                     .opacity(containedInToBrew ? 1 : 0)
