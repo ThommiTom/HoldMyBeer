@@ -1,5 +1,5 @@
 //
-//  SearchCriteria.swift
+//  SearchParameter.swift
 //  HoldMyBeer
 //
 //  Created by Thomas Schatton on 13.05.23.
@@ -22,7 +22,7 @@ struct SearchParameter {
     var beerName: String = ""
     
     var toggleBrewDate: Bool = false
-    var inequalitySelection = Inequality.greaterThan
+    var inequalitySelection = TimeInequality.brewedAfter
     
     let pickerMonth = Array<Int>.init(1...12)
     var monthSelection = 6
@@ -46,9 +46,9 @@ struct SearchParameter {
     
     var setInequality: InequalityParameter {
         switch inequalitySelection {
-        case .greaterThan:
+        case .brewedAfter:
             return .brewedAfter
-        case .lessThan:
+        case .brewedBefore:
             return .brewedBefore
         }
     }
@@ -59,15 +59,15 @@ struct SearchParameter {
     var hops: String = ""
     var malt: String = ""
     
-    let inequalityChoice: [Inequality] = [.greaterThan, .lessThan]
+    let inequalityChoice: [TimeInequality] = [.brewedAfter, .brewedBefore]
     let viewChoices: [SearchViewOptions] = [.searchView, .sommelierView]
 }
 
-enum Inequality: String, Identifiable {
-    case greaterThan = ">"
-    case lessThan = "<"
+enum TimeInequality: String, Identifiable {
+    case brewedBefore = "before"
+    case brewedAfter = "after"
     
-    var id: Inequality { self }
+    var id: TimeInequality { self }
 }
 
 enum SearchViewOptions: String, Identifiable {

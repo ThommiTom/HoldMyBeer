@@ -8,21 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var beerManager = BeerManager()
-    @StateObject var brewManager = BrewManager()
-    
     var body: some View {
         TabView {
-            AssortmentView(beerManager: beerManager)
+            BeerCatalogView()
                 .tabItem {
                     Image(systemName: "list.clipboard")
-                    Text("Assortment")
+                    Text("Beers")
                 }
             
-            ToBrewsView(brewManager: brewManager)
+            BrewListView()
             .tabItem {
                 Image(systemName: "checklist")
-                Text("\'To Brews\'")
+                Text("Brews")
             }
         }
     }

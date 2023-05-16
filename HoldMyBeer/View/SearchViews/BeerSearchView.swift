@@ -1,5 +1,5 @@
 //
-//  BeerSearch.swift
+//  BeerSearchView.swift
 //  HoldMyBeer
 //
 //  Created by Thomas Schatton on 13.05.23.

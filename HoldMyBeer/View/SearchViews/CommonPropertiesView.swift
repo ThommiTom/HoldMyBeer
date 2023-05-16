@@ -31,11 +31,13 @@ struct CommonPropertiesView: View {
                         .foregroundColor(.secondary)
                         .opacity(0.75)
                 }
+                .buttonStyle(.plain)
                 .alert(common.title, isPresented: $showAlert) {} message: {
                     VStack {
                         Text(common.description)
                     }
                 }
+                
                 
                 Text(common.title)
                 Spacer()

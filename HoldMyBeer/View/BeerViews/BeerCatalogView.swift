@@ -1,5 +1,5 @@
 //
-//  BeerSearchView.swift
+//  BeerCatalogView.swift
 //  HoldMyBeer
 //
 //  Created by Thomas Schatton on 13.05.23.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct AssortmentView: View {
-    @ObservedObject var beerManager: BeerManager
+struct BeerCatalogView: View {
+    @StateObject var beerManager = BeerManager()
     
     @State private var showSheet = false
     
@@ -16,7 +16,7 @@ struct AssortmentView: View {
         NavigationStack {
             HStack(spacing: 20) {
                 Image(systemName: "arrow.right")
-                Text("Swipe right to add beer to \'To Brews\'")
+                Text("Swipe right to add beer to Brews")
                 Image(systemName: "arrow.right")
             }
             .font(.caption)
@@ -34,7 +34,7 @@ struct AssortmentView: View {
                                                 beerManager.addToBrews(id: beer.id)
                                                 beerManager.saveBeerToBrews(beer)
                                             } label: {
-                                                Label("add to\n\'To Brews\'", systemImage: "checklist")
+                                                Label("Add to Brews", systemImage: "checklist")
                                             }
                                             .tint(.blue)
                                         }
@@ -57,7 +57,7 @@ struct AssortmentView: View {
                                                 beerManager.addToBrews(id: beer.id)
                                                 beerManager.saveBeerToBrews(beer)
                                             } label: {
-                                                Label("add to\n\'To Brews\'", systemImage: "checklist")
+                                                Label("Add to Brews", systemImage: "checklist")
                                             }
                                             .tint(.blue)
                                         }
@@ -68,7 +68,7 @@ struct AssortmentView: View {
                 }
             }
             .listStyle(.plain)
-            .navigationTitle(beerManager.searchedBeers.isEmpty ? "Beer Assortment" : "Search Result")
+            .navigationTitle(beerManager.searchedBeers.isEmpty ? "Beer Catalog" : "Search Result")
             .navigationDestination(for: Beer.self) { beer in
                 BeerDetailView(beer: beer)
             }
@@ -120,8 +120,8 @@ struct AssortmentView: View {
     }
 }
 
-struct AssortmentView_Previews: PreviewProvider {
+struct BeerCatalogView_Previews: PreviewProvider {
     static var previews: some View {
-        AssortmentView(beerManager: BeerManager())
+        BeerCatalogView()
     }
 }

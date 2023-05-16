@@ -1,5 +1,5 @@
 //
-//  ToBrewsView.swift
+//  BrewListView.swift
 //  HoldMyBeer
 //
 //  Created by Thomas Schatton on 14.05.23.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ToBrewsView: View {
-    @ObservedObject var brewManager: BrewManager
+struct BrewListView: View {
+    @StateObject var brewManager = BrewManager()
     
     var body: some View {
         NavigationStack {
@@ -27,7 +27,7 @@ struct ToBrewsView: View {
                     .listStyle(.plain)
                 }
             }
-            .navigationTitle("\'To Brews\' (To Dos)")
+            .navigationTitle("Brews")
             .navigationDestination(for: Brew.self) { brew in
                 BrewView(brewManager: brewManager, index: brewManager.getIndexOf(brew.beer))
             }
@@ -38,8 +38,8 @@ struct ToBrewsView: View {
     }
 }
 
-struct ToBrewsView_Previews: PreviewProvider {
+struct BrewListView_Previews: PreviewProvider {
     static var previews: some View {
-        ToBrewsView(brewManager: BrewManager())
+        BrewListView(brewManager: BrewManager())
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AsyncImageView.swift
+//  BeerListItem.swift
 //  HoldMyBeer
 //
 //  Created by Thomas Schatton on 13.05.23.
@@ -31,10 +31,19 @@ struct BeerListItem: View {
             }
             
             VStack(alignment: .leading, spacing: 10) {
-                Text("🍺 \'To Brews\' 🍺")
-                    .foregroundColor(.secondary)
-                    .font(.caption)
-                    .opacity(containedInToBrew ? 1 : 0)
+                HStack {
+                    Text("🍺 added to Brews")
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                        .opacity(containedInToBrew ? 1 : 0)
+                    Spacer()
+                    if let firstBrewed = beer.first_brewed {
+                        Text("first brewed \(firstBrewed)")
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                    }
+                }
+                
                 Text(beer.name)
                     .font(.title3)
                     .bold()

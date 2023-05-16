@@ -105,6 +105,13 @@ class URLBuilder {
     
 }
 
+enum Inequality: String, Identifiable {
+    case greaterThan = ">"
+    case lessThan = "<"
+    
+    var id: Inequality { self }
+}
+
 enum InequalityParameter: String {
     case alcoholByVolumeGreaterThan = "abv_gt"
     case alcoholByVolumeLessThan = "abv_lt"
