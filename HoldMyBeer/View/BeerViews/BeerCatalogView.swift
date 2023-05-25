@@ -104,6 +104,7 @@ struct BeerCatalogView: View {
             .sheet(isPresented: $showSheet) {
                 SearchView {
                     beerManager.searchBeers()
+//                    beerManager.searchBeersOverCombine()
                 }
             }
             .onAppear {

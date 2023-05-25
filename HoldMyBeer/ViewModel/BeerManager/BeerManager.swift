@@ -5,6 +5,7 @@
 //  Created by Thomas Schatton on 12.05.23.
 //
 
+import Combine
 import Foundation
 
 class BeerManager: ObservableObject {
@@ -26,6 +27,9 @@ class BeerManager: ObservableObject {
     
     private(set) var pageNo = 1
     let itemsPerPage = 50
+    
+//    var cancellables = Set<AnyCancellable>()
+    
     
     func appendCatalog(with beers: [Beer]) {
         beerCatalog.append(contentsOf: beers)
