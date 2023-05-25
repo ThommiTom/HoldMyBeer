@@ -5,6 +5,7 @@
 //  Created by Thomas Schatton on 13.05.23.
 //
 
+import Combine
 import Foundation
 
 extension BeerManager {
@@ -47,3 +48,34 @@ extension BeerManager {
         }
     }
 }
+
+/* Network calls with combine */
+//extension BeerManager {
+//    func searchBeersOverCombine() {
+//        guard let url = URLBuilder.shared.buildURL() else { return }
+//
+//        URLSession.shared.dataTaskPublisher(for: url)
+//            .subscribe(on: DispatchQueue.global(qos: .background))
+//            .receive(on: DispatchQueue.main)
+//            .tryMap { (data, response) -> Data in
+//                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else { throw URLError(.badURL)}
+//                return data
+//            }
+//            .decode(type: [Beer].self, decoder: JSONDecoder())
+//            .sink { (completion) in
+//                switch completion {
+//                case .finished:
+//                    print("finished completion")
+//                case .failure(let error):
+//                    if let networkError = error as? NetworkError {
+//                        self.setErrorAlert(with: networkError)
+//                    }
+//
+//                    print(error.localizedDescription)
+//                }
+//            } receiveValue: { [weak self] beers in
+//                self?.processSearched(new: beers)
+//            }
+//            .store(in: &cancellables)
+//    }
+//}
