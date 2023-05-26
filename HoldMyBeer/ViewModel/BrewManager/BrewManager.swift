@@ -70,13 +70,13 @@ class BrewManager: ObservableObject {
     }
 
     func nextStepForBrew(with index: Int) {
-        if !brews[index].steps.stepsToDo.isEmpty {
+        if !brews[index].steps.stepsToDo.step.isEmpty {
             // we have some step to do
-            brews[index].steps.doneSteps.append(brews[index].steps.currentStep)
-            brews[index].steps.currentStep = brews[index].steps.stepsToDo.first!
-            brews[index].steps.stepsToDo.removeFirst()
+            brews[index].steps.doneSteps.step.append(brews[index].steps.currentStep)
+            brews[index].steps.currentStep = brews[index].steps.stepsToDo.step.first!
+            brews[index].steps.stepsToDo.step.removeFirst()
         } else if !brews[index].steps.currentStep.isEmpty {
-            brews[index].steps.doneSteps.append(brews[index].steps.currentStep)
+            brews[index].steps.doneSteps.step.append(brews[index].steps.currentStep)
             brews[index].steps.currentStep = ""
         }
 
@@ -88,11 +88,11 @@ class BrewManager: ObservableObject {
     }
 
     func showNextStep(for index: Int) -> String? {
-        return brews[index].steps.stepsToDo.first
+        return brews[index].steps.stepsToDo.step.first
     }
 
     func showLastDoneStep(for index: Int) -> String? {
-        return brews[index].steps.doneSteps.last
+        return brews[index].steps.doneSteps.step.last
     }
 
     func saveRating(_ rating: Rating, for index: Int) {

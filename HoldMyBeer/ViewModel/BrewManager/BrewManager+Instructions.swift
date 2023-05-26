@@ -12,13 +12,13 @@ extension BrewManager {
         var instructions = Instruction()
 
         instructions.currentStep = "Gather ingredients"
-        instructions.stepsToDo.append("Boil Malts with plenty of water")
-        instructions.stepsToDo.append("At the start of boil process add start hops")
-        instructions.stepsToDo.append("During the middle of boil process add middle hops")
-        instructions.stepsToDo.append("Towards the end of boil process add end hops")
-        instructions.stepsToDo.append("Let the brew cool down")
-        instructions.stepsToDo.append("Add yeast and start fermentation process")
-        instructions.stepsToDo.append("Wait until fermentation finshes")
+        instructions.stepsToDo.step.append("Boil Malts with plenty of water")
+        instructions.stepsToDo.step.append("At the start of boil process add start hops")
+        instructions.stepsToDo.step.append("During the middle of boil process add middle hops")
+        instructions.stepsToDo.step.append("Towards the end of boil process add end hops")
+        instructions.stepsToDo.step.append("Let the brew cool down")
+        instructions.stepsToDo.step.append("Add yeast and start fermentation process")
+        instructions.stepsToDo.step.append("Wait until fermentation finshes")
 
         return instructions
     }
