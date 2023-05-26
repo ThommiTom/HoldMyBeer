@@ -14,11 +14,11 @@ struct Brew: Identifiable, Hashable, Codable {
     var rating: Rating?
 
     var doneCount: Double {
-        Double(steps.doneSteps.count)
+        Double(steps.doneSteps.step.count)
     }
 
     var totalCount: Double {
-        Double(steps.doneSteps.count + (steps.currentStep.isEmpty ? 0 : 1) + steps.stepsToDo.count)
+        Double(steps.doneSteps.step.count + (steps.currentStep.isEmpty ? 0 : 1) + steps.stepsToDo.step.count)
     }
 
     var progress: Double {
@@ -33,7 +33,12 @@ struct Brew: Identifiable, Hashable, Codable {
 }
 
 struct Instruction: Hashable, Codable {
-    var stepsToDo: [String] = []
+    var stepsToDo: Steps = .init(title: "Next steps", step: [String]())
     var currentStep: String = ""
-    var doneSteps: [String] = []
+    var doneSteps: Steps = .init(title: "Finished steps", step: [String]())
+}
+
+struct Steps: Hashable, Codable {
+    var title: String = ""
+    var step: [String] = []
 }

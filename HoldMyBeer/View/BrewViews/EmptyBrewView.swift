@@ -13,7 +13,7 @@ struct EmptyBrewView: View {
             Text("No beers to brew!")
                 .font(.largeTitle)
                 .bold()
-            Text("Add beers via Assortment Tab by swiping.")
+            Text("Add beers via Catalog Tab by swiping.")
                 .font(.callout)
                 .foregroundColor(.secondary)
         }
