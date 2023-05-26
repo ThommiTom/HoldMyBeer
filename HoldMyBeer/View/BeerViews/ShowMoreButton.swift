@@ -10,7 +10,7 @@ import SwiftUI
 struct ShowMoreButton: View {
     @Binding var showButton: Bool
     var getBeers: () -> Void
-    
+
     var body: some View {
         if showButton {
             HStack(alignment: .center) {

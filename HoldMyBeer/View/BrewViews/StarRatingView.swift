@@ -9,25 +9,20 @@ import SwiftUI
 
 struct StarRatingView: View {
     @Binding var rating: Int
-    
     var label = ""
     var maximumRating = 5
-    
     var offImage: Image?
     var onImage = Image(systemName: "star.fill")
-    
     var offColor = Color.gray
     var onColor = Color.yellow
-    
     var body: some View {
         HStack {
             Spacer()
             if label.isEmpty == false {
                 Text(label)
             }
-            
             ForEach(1..<maximumRating + 1, id: \.self) { number in
-                //image(for: number)
+//                image(for: number)
                 Image(systemName: "star.fill")
                     .foregroundColor(number > rating ? offColor : onColor)
                     .onTapGesture {
@@ -53,7 +48,6 @@ struct StarRatingView: View {
             }
         }
     }
-    
     func image(for number: Int) -> Image {
         if number > rating {
             return offImage ?? onImage

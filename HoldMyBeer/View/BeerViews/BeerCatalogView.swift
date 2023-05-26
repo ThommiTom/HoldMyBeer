@@ -9,9 +9,9 @@ import SwiftUI
 
 struct BeerCatalogView: View {
     @StateObject var beerManager = BeerManager()
-    
+
     @State private var showSheet = false
-    
+
     var body: some View {
         NavigationStack {
             HStack(spacing: 20) {
@@ -41,7 +41,7 @@ struct BeerCatalogView: View {
                                     }
                             }
                         }
-                        
+
                         ShowMoreButton(showButton: $beerManager.isShowMoreButtonActive) {
                             beerManager.getBeers()
                         }
@@ -82,7 +82,7 @@ struct BeerCatalogView: View {
                         }
                     }
                 }
-                
+
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Menu {
                         ForEach(BeerSorting.allCases) { sortCase in

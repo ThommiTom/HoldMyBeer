@@ -12,7 +12,7 @@ extension FileManager {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-    
+
     func load<Item: Codable>(location: URL) -> Item? {
         do {
             let data = try Data(contentsOf: location)
@@ -25,7 +25,7 @@ extension FileManager {
         }
         return nil
     }
-    
+
     func save<Item: Codable>(item: Item, location: URL) {
         do {
             let jsonEncoder = JSONEncoder()

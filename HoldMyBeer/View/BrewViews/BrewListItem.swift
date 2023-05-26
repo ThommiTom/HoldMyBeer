@@ -9,11 +9,11 @@ import SwiftUI
 
 struct BrewListItem: View {
     var brew: Brew
-    
+
     var body: some View {
         VStack {
             BeerListItem(beer: brew.beer)
-            
+
             HStack {
                 ProgressView("Brew Progress", value: brew.progress, total: 100.0)
                     .tint(brew.beer.ebc != nil ? EBCScale.getColor(by: brew.beer.ebc!) : .blue)

@@ -9,14 +9,14 @@ import SwiftUI
 
 struct IngredientsView: View {
     let ingredients: Ingredients?
-    
+
     var body: some View {
         if let ingridients = ingredients {
             Text("Ingriedients")
                 .font(.caption)
                 .foregroundColor(.secondary)
             Divider()
-            
+
             VStack(alignment: .leading) {
                 Text("MALT")
                     .font(.caption2)
@@ -33,7 +33,7 @@ struct IngredientsView: View {
                 }
             }
             .padding(.bottom, 15)
-            
+
             VStack(alignment: .leading) {
                 Text("HOP")
                     .font(.caption2)
@@ -50,7 +50,7 @@ struct IngredientsView: View {
                 }
             }
             .padding(.bottom, 15)
-            
+
             if let yeast = ingridients.yeast {
                 VStack(alignment: .leading) {
                     Text("YEAST")

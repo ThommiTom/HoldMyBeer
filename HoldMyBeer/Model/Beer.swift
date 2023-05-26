@@ -9,43 +9,48 @@ struct Beer: Identifiable, Codable, Hashable {
     let id: Int
     let name: String
     let tagline: String
-    let first_brewed: String?
+    let firstBrewed: String?
     let description: String
-    let image_url: String?
+    let imageUrl: String?
     let abv: Double
     let ibu: Double?
-    let target_fg: Int?
-    let target_og: Double?
+    let targetFg: Int?
+    let targetOg: Double?
     let ebc: Double?
-    let srm, ph: Double?
+    let srm: Double?
+//    let ph: Double?
     let attenuationLevel: Double?
 
     let ingredients: Ingredients?
-    let food_pairing: [String]
-    let brewers_tips: String?
+    let foodPairing: [String]
+    let brewersTips: String?
 
     let volume: BoilVolume?
     let boilVolume: BoilVolume?
     let method: Met?
     let metod: Met?
-    
+
     static let example = Beer(id: 1,
                               name: "Buzz",
                               tagline: "A Real Bitter Experience.",
-                              first_brewed: "09/2007",
-                              description: "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.",
-                              image_url: "https://images.punkapi.com/v2/keg.png",
+                              firstBrewed: "09/2007",
+                              description:
+                                """
+                                A light, crisp and bitter IPA brewed with English and American hops.
+                                A small batch brewed only once.
+                                """,
+                              imageUrl: "https://images.punkapi.com/v2/keg.png",
                               abv: 4.5,
                               ibu: nil,
-                              target_fg: nil,
-                              target_og: nil,
+                              targetFg: nil,
+                              targetOg: nil,
                               ebc: nil,
                               srm: nil,
-                              ph: nil,
+//                              ph: nil,
                               attenuationLevel: nil,
                               ingredients: nil,
-                              food_pairing: [String](),
-                              brewers_tips: nil,
+                              foodPairing: [String](),
+                              brewersTips: nil,
                               volume: nil,
                               boilVolume: nil,
                               method: nil,
@@ -76,7 +81,7 @@ struct Malt: Codable, Hashable {
 }
 
 struct Met: Codable, Hashable {
-    let mash_temp: [MashTemp]
+    let mashTemp: [MashTemp]
     let fermentation: Fermentation
     let twist: String?
 }

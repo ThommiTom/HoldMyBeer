@@ -11,7 +11,6 @@ struct SearchView: View {
     @Environment(\.dismiss) var dismiss
     @State private var searchParameter = SearchParameter()
     var searchBeers: () -> Void
-    
     var body: some View {
         NavigationStack {
             Picker("View Selection", selection: $searchParameter.selectedView) {
@@ -19,7 +18,6 @@ struct SearchView: View {
             }
             .pickerStyle(.segmented)
             .padding()
-            
             Group {
                 switch searchParameter.selectedView {
                 case .searchView:
@@ -29,16 +27,13 @@ struct SearchView: View {
                 }
             }
             .navigationTitle(searchParameter.viewTitle)
-            
             Spacer()
-            
             Button {
                 searchBeers()
                 dismiss()
             } label: {
                 Text(searchParameter.selectedView == .searchView ? "Go for it!" : "Recommend something!")
                     .frame(maxWidth: .infinity)
-                    
             }
             .padding()
             .buttonStyle(.borderedProminent)

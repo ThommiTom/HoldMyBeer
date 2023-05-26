@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BrewListView: View {
     @StateObject var brewManager = BrewManager()
-    
+
     var body: some View {
         NavigationStack {
             Group {

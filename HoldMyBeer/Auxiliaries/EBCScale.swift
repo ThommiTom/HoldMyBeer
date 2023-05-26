@@ -10,7 +10,7 @@ import SwiftUI
 class EBCScale {
     static func getColor(by ebc: Double) -> Color {
         let ebc = Int(ebc)
-        
+
         switch ebc {
         case ...4:
             return .ebc4
@@ -22,10 +22,10 @@ class EBCScale {
             return .white
         }
     }
-    
+
     private init() {}
-    
-    static private let ebcColors: [ClosedRange<Int> : Color] = [
+
+    static private let ebcColors: [ClosedRange<Int>: Color] = [
         0...4: .ebc4,
         5...6: .ebc6,
         7...8: .ebc8,
@@ -40,14 +40,9 @@ class EBCScale {
         58...69: .ebc69,
         70...79: .ebc79
     ]
-    
+
     static private func findColor(for ebc: Int) -> Color {
-        for color in ebcColors {
-            if color.key.contains(ebc) {
-                return color.value
-            }
-        }
-        
+        for color in ebcColors where color.key.contains(ebc) { return color.value }
         return .white
     }
 }

@@ -15,7 +15,7 @@ extension BeerManager {
             self.alertData.show = true
         }
     }
-    
+
     func setErrorAlert(with error: NetworkError) {
         DispatchQueue.main.async {
             self.alertData.title = "Oops..."

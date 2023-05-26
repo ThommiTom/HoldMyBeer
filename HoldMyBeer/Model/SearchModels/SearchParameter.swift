@@ -9,7 +9,7 @@ import Foundation
 
 struct SearchParameter {
     var selectedView: SearchViewOptions = .searchView
-    
+
     var viewTitle: String {
         switch selectedView {
         case .searchView:
@@ -18,16 +18,16 @@ struct SearchParameter {
             return "Recommendation"
         }
     }
-    
+
     var beerName: String = ""
-    
+
     var toggleBrewDate: Bool = false
     var inequalitySelection = TimeInequality.brewedAfter
-    
-    let pickerMonth = Array<Int>.init(1...12)
+
+    let pickerMonth = 1...12
     var monthSelection = 6
-    let pickerYear = Array<Int>.init(2003...2023)
-    var pickerYearAsString: Array<String> {
+    let pickerYear = 2003...2023
+    var pickerYearAsString: [String] {
         var array = [String]()
         for year in pickerYear {
             array.append(String(year))
@@ -35,7 +35,7 @@ struct SearchParameter {
         return array
     }
     var yearSelection = "2013"
-    
+
     var brewDate: String {
         if monthSelection < 10 {
             return "0\(monthSelection)-\(yearSelection)"
@@ -43,7 +43,7 @@ struct SearchParameter {
             return "\(monthSelection)-\(yearSelection)"
         }
     }
-    
+
     var setInequality: InequalityParameter {
         switch inequalitySelection {
         case .brewedAfter:
@@ -52,13 +52,13 @@ struct SearchParameter {
             return .brewedBefore
         }
     }
-    
+
     var foodPairing: String = ""
-    
+
     var yeast: String = ""
     var hops: String = ""
     var malt: String = ""
-    
+
     let inequalityChoice: [TimeInequality] = [.brewedAfter, .brewedBefore]
     let viewChoices: [SearchViewOptions] = [.searchView, .sommelierView]
 }
@@ -66,15 +66,13 @@ struct SearchParameter {
 enum TimeInequality: String, Identifiable {
     case brewedBefore = "before"
     case brewedAfter = "after"
-    
+
     var id: TimeInequality { self }
 }
 
 enum SearchViewOptions: String, Identifiable {
     case searchView = "Search"
     case sommelierView = "Sommelier"
-    
+
     var id: SearchViewOptions { self }
 }
-
-

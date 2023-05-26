@@ -12,10 +12,10 @@ struct BeerListItem: View {
     var containedInToBrew: Bool = false
     var width: CGFloat = 50
     var height: CGFloat = 100
-    
+
     var body: some View {
         HStack(spacing: 15) {
-            if let imageURL = beer.image_url {
+            if let imageURL = beer.imageUrl {
                 AsyncImage(url: URL(string: imageURL)) { image in
                     image
                         .resizable()
@@ -29,7 +29,7 @@ struct BeerListItem: View {
                     .font(.largeTitle)
                     .frame(width: width, height: height, alignment: .center)
             }
-            
+
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     Text("🍺 added to Brews")
@@ -37,19 +37,19 @@ struct BeerListItem: View {
                         .font(.caption)
                         .opacity(containedInToBrew ? 1 : 0)
                     Spacer()
-                    if let firstBrewed = beer.first_brewed {
+                    if let firstBrewed = beer.firstBrewed {
                         Text("first brewed \(firstBrewed)")
                             .foregroundColor(.secondary)
                             .font(.caption)
                     }
                 }
-                
+
                 Text(beer.name)
                     .font(.title3)
                     .bold()
                 Text(beer.tagline)
                     .font(.callout)
-                
+
                 HStack {
                     if let ebc = beer.ebc {
                         Text("Color")

@@ -15,7 +15,7 @@ struct ContentView: View {
                     Image(systemName: "list.clipboard")
                     Text("Beers")
                 }
-            
+
             BrewListView()
             .tabItem {
                 Image(systemName: "checklist")

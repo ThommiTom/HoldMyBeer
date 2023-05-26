@@ -10,11 +10,11 @@ import Foundation
 protocol CommonProperties {
     var title: String { get }
     var description: String { get }
-    
+
     var min: Double { get }
     var max: Double { get }
     var step: Double { get }
-    
+
     var value: Double { get set }
     var toggle: Bool { get set }
     var inequality: Inequality { get set }

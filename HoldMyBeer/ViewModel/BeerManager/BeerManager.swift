@@ -5,7 +5,7 @@
 //  Created by Thomas Schatton on 12.05.23.
 //
 
-import Combine
+// import Combine
 import Foundation
 
 class BeerManager: ObservableObject {
@@ -14,27 +14,26 @@ class BeerManager: ObservableObject {
 
     @Published var alertData = AlertData()
     @Published var isShowMoreButtonActive = true
-    
+
     @Published private(set) var beersToBrew = [Int]()
-    
+
     @Published var sorting: BeerSorting = .none
-    
+
     init() {
         self.getBeers()
     }
-    
+
     private(set) var viewTitle: String = ""
-    
+
     private(set) var pageNo = 1
     let itemsPerPage = 50
-    
+
 //    var cancellables = Set<AnyCancellable>()
-    
-    
+
     func appendCatalog(with beers: [Beer]) {
         beerCatalog.append(contentsOf: beers)
     }
-    
+
     func processSearched(new beers: [Beer]) {
         if beers.isEmpty {
             setAlert()
@@ -43,40 +42,40 @@ class BeerManager: ObservableObject {
             setSearched(beers)
         }
     }
-    
+
     private func setSearched(_ beers: [Beer]) {
         DispatchQueue.main.async {
             self.searchedBeers = beers
         }
     }
-    
+
     func resetSearchResult() {
         DispatchQueue.main.async {
             self.searchedBeers.removeAll()
         }
     }
-    
+
     func incrementPageNo() {
         pageNo += 1
     }
-    
+
     func addToBrews(id: Int) {
         if !beersToBrew.contains(id) {
             beersToBrew.append(id)
         }
     }
-    
+
     func containedInToBrew(id: Int) -> Bool {
         beersToBrew.contains(id)
     }
-    
+
     func saveBeerToBrews(_ beer: Beer) {
         Persistence.shared.saveBeerToBrew(beer)
     }
-    
+
     func loadBeersToBrew() {
         let loaded = Persistence.shared.loadBeersToBrew()
-        
+
         beersToBrew.removeAll()
         for item in loaded {
             beersToBrew.append(item.id)

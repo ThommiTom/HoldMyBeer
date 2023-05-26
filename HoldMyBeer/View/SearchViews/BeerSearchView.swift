@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BeerSearchView: View {
     @Binding var searchParameter: SearchParameter
-    
+
     var body: some View {
         VStack {
             List {
@@ -18,21 +18,22 @@ struct BeerSearchView: View {
                     TextField("Beer Name", text: $searchParameter.beerName)
                         .onChange(of: searchParameter.beerName) { newValue in
                             if newValue.isEmpty {
-                                let _ = URLBuilder.shared.removeFuzzyQueryItem(for: .beerName)
+                                _ = URLBuilder.shared.removeFuzzyQueryItem(for: .beerName)
                             } else {
-                                let _ = URLBuilder.shared.addFuzzyQueryItem(for: .beerName, newValue)
+                                _ = URLBuilder.shared.addFuzzyQueryItem(for: .beerName, newValue)
                             }
                         }
                 }
                 .padding()
-                
+
                 VStack {
                     Toggle("Brew Date", isOn: $searchParameter.toggleBrewDate)
                         .onChange(of: searchParameter.toggleBrewDate) { newValue in
                             if newValue {
-                                let _ = URLBuilder.shared.addQueryItem(for: searchParameter.setInequality, searchParameter.brewDate)
+                                _ = URLBuilder.shared.addQueryItem(for: searchParameter.setInequality,
+                                                                   searchParameter.brewDate)
                             } else {
-                                let _ = URLBuilder.shared.removeQueryItem(for: searchParameter.setInequality)
+                                _ = URLBuilder.shared.removeQueryItem(for: searchParameter.setInequality)
                             }
                         }
                     if searchParameter.toggleBrewDate {
@@ -45,9 +46,10 @@ struct BeerSearchView: View {
                                 .frame(maxWidth: geometry.size.width / 3)
                                 .pickerStyle(.wheel)
                                 .onChange(of: searchParameter.inequalitySelection) { _ in
-                                    let _ = URLBuilder.shared.addQueryItem(for: searchParameter.setInequality, searchParameter.brewDate)
+                                    _ = URLBuilder.shared.addQueryItem(for: searchParameter.setInequality,
+                                                                       searchParameter.brewDate)
                                 }
-                                
+
                                 Picker("Month", selection: $searchParameter.monthSelection) {
                                     ForEach(searchParameter.pickerMonth, id: \.self) { Text("\($0)") }
                                 }
@@ -55,9 +57,10 @@ struct BeerSearchView: View {
                                 .frame(maxWidth: geometry.size.width / 3)
                                 .pickerStyle(.wheel)
                                 .onChange(of: searchParameter.monthSelection) { _ in
-                                    let _ = URLBuilder.shared.addQueryItem(for: searchParameter.setInequality, searchParameter.brewDate)
+                                    _ = URLBuilder.shared.addQueryItem(for: searchParameter.setInequality,
+                                                                       searchParameter.brewDate)
                                 }
-                                
+
                                 Picker("Year", selection: $searchParameter.yearSelection) {
                                     ForEach(searchParameter.pickerYearAsString, id: \.self) { Text($0) }
                                 }
@@ -65,14 +68,15 @@ struct BeerSearchView: View {
                                 .frame(maxWidth: geometry.size.width / 3)
                                 .pickerStyle(.wheel)
                                 .onChange(of: searchParameter.yearSelection) { _ in
-                                    let _ = URLBuilder.shared.addQueryItem(for: searchParameter.setInequality, searchParameter.brewDate)
+                                    _ = URLBuilder.shared.addQueryItem(for: searchParameter.setInequality,
+                                                                       searchParameter.brewDate)
                                 }
                             }
                         }
                         .frame(minHeight: 90)
                     }
                 }
-                
+
                 CommonPropertiesView(common: ABV())
                 CommonPropertiesView(common: IBU())
                 CommonPropertiesView(common: EBC())

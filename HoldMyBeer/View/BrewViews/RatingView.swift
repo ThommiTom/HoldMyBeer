@@ -12,10 +12,10 @@ struct RatingView: View {
     @ObservedObject var brewManager: BrewManager
     var index: Int
     var beer: Beer
-    
+
     @State private var score: Int = 3
     @State private var comment: String = ""
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -39,7 +39,6 @@ struct RatingView: View {
             .padding()
             .navigationTitle("Rate The Beer")
         }
-        
     }
 }
 

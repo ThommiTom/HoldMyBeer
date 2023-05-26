@@ -10,9 +10,9 @@ import SwiftUI
 struct BrewView: View {
     @ObservedObject var brewManager: BrewManager
     var index: Int
-    
+
     @State private var rateBeer = false
-    
+
     var body: some View {
         VStack {
             Group {
@@ -26,13 +26,15 @@ struct BrewView: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                
+
                 ProgressView("Brew Progress", value: brewManager.brews[index].progress, total: 100.0)
-                    .tint(brewManager.brews[index].beer.ebc != nil ? EBCScale.getColor(by: brewManager.brews[index].beer.ebc!) : .blue)
+                    .tint(brewManager.brews[index].beer.ebc != nil
+                          ? EBCScale.getColor(by: brewManager.brews[index].beer.ebc!)
+                          : .blue)
                     .padding()
             }
             .padding(.horizontal)
-            
+
             List {
                 // next steps
                 if let nextStep = brewManager.showNextStep(for: index) {
@@ -47,7 +49,7 @@ struct BrewView: View {
                     }
                     .padding(.vertical)
                 }
-                
+
                 // current step
                 if brewManager.brews[index].progress < 100.0 {
                     VStack(alignment: .leading, spacing: 15) {
@@ -75,7 +77,7 @@ struct BrewView: View {
                     }
                     .padding(.vertical)
                 }
-                
+
                 // done steps
                 if let lastDoneStep = brewManager.showLastDoneStep(for: index) {
                     NavigationLink(value: brewManager.brews[index].steps.doneSteps) {
@@ -92,14 +94,14 @@ struct BrewView: View {
                 }
             }
             .listStyle(.plain)
-            
+
             if brewManager.brews[index].progress == 100.0 && brewManager.brews[index].rating == nil {
                 Button {
                     rateBeer = true
                 } label: {
                     Text("Drink and rate beer!")
                         .frame(maxWidth: .infinity)
-                        
+
                 }
                 .padding()
                 .buttonStyle(.borderedProminent)
@@ -131,11 +133,10 @@ struct BrewView: View {
     }
 }
 
-
 // Preview Does not work du to index and fatal error
 
-//struct BrewView_Previews: PreviewProvider {
+// struct BrewView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        BrewView(brewManager: BrewManager(), index: 0)
 //    }
-//}
+// }

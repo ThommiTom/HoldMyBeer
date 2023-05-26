@@ -10,7 +10,7 @@ import SwiftUI
 struct InstructionListView: View {
     let instructions: [String]
     let viewTitle: String
-    
+
     var body: some View {
         List {
             ForEach(instructions, id: \.self) { instruction in

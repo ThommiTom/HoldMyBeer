@@ -5,13 +5,14 @@
 //  Created by Thomas Schatton on 13.05.23.
 //
 
-import Combine
+// import Combine
 import Foundation
 
 extension BeerManager {
     func searchBeers() {
         Task {
-            await NetworkManager.shared.networkCall(with: URLBuilder.shared.buildURL()) { (result: Result<[Beer], NetworkError>) in
+            let url = URLBuilder.shared.buildURL()
+            await NetworkManager.shared.networkCall(with: url) { (result: Result<[Beer], NetworkError>) in
                 switch result {
                 case .success(let beers):
                     self.processSearched(new: beers)
@@ -21,17 +22,18 @@ extension BeerManager {
             }
         }
     }
-    
+
     func getBeers() {
         Task {
-            await NetworkManager.shared.networkCall(with: URLBuilder.shared.createPaginationURL(page: pageNo, itemsPerPage: itemsPerPage)) { (result: Result<[Beer], NetworkError>) in
+            let url = URLBuilder.shared.createPaginationURL(page: pageNo, itemsPerPage: itemsPerPage)
+            await NetworkManager.shared.networkCall(with: url) { (result: Result<[Beer], NetworkError>) in
                 switch result {
                 case .success(let newBeers):
                     if !newBeers.isEmpty {
                         self.incrementPageNo()
                         DispatchQueue.main.async {
                             self.appendCatalog(with: newBeers)
-                            
+
                             if newBeers.count < self.itemsPerPage {
                                 self.isShowMoreButtonActive = false
                             }
@@ -50,7 +52,8 @@ extension BeerManager {
 }
 
 /* Network calls with combine */
-//extension BeerManager {
+
+// extension BeerManager {
 //    func searchBeersOverCombine() {
 //        guard let url = URLBuilder.shared.buildURL() else { return }
 //
@@ -58,7 +61,8 @@ extension BeerManager {
 //            .subscribe(on: DispatchQueue.global(qos: .background))
 //            .receive(on: DispatchQueue.main)
 //            .tryMap { (data, response) -> Data in
-//                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else { throw URLError(.badURL)}
+//                guard let response = response as? HTTPURLResponse,
+//                        (200...299).contains(response.statusCode) else { throw URLError(.badURL)}
 //                return data
 //            }
 //            .decode(type: [Beer].self, decoder: JSONDecoder())
@@ -78,4 +82,4 @@ extension BeerManager {
 //            }
 //            .store(in: &cancellables)
 //    }
-//}
+// }

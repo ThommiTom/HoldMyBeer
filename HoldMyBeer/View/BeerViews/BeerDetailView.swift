@@ -10,11 +10,11 @@ import SwiftUI
 struct BeerDetailView: View {
     var beer: Beer
     var containedInToBrew: Bool = false
-    
+
     var body: some View {
         VStack {
             BeerListItem(beer: beer, containedInToBrew: containedInToBrew, width: 75, height: 150)
-            
+
             ScrollView {
                 Text("Description")
                     .font(.caption)
@@ -22,16 +22,16 @@ struct BeerDetailView: View {
                 Divider()
                 Text(beer.description)
                     .padding(.bottom, 30)
-                
+
                 IngredientsView(ingredients: beer.ingredients)
-                
-                if !beer.food_pairing.isEmpty {
+
+                if !beer.foodPairing.isEmpty {
                     Text("Food pairing")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Divider()
                     VStack(alignment: .leading) {
-                        ForEach(beer.food_pairing, id: \.self) {
+                        ForEach(beer.foodPairing, id: \.self) {
                             Text($0)
                                 .padding(.all, 3)
                         }

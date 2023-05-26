@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SommelierView: View {
     @Binding var searchParameter: SearchParameter
-    
+
     var body: some View {
         VStack {
             Text("Tell us what you're eatin'")
@@ -19,11 +19,10 @@ struct SommelierView: View {
             Text("🍔🍺\t🌯🍺\t🍕🍺")
                 .font(.title)
                 .padding()
-            
-            
+
             TextField("food, dish, snack, ...", text: $searchParameter.foodPairing)
                 .onChange(of: searchParameter.foodPairing, perform: { newValue in
-                    let _ = URLBuilder.shared.addFuzzyQueryItem(for: .food, newValue)
+                    _ = URLBuilder.shared.addFuzzyQueryItem(for: .food, newValue)
                 })
                 .multilineTextAlignment(.center)
                 .padding()

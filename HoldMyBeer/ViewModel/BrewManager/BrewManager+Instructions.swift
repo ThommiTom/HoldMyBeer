@@ -10,7 +10,7 @@ import Foundation
 extension BrewManager {
     func setBrewInstructionsMockUp() -> Instruction {
         var instructions = Instruction()
-        
+
         instructions.currentStep = "Gather ingredients"
         instructions.stepsToDo.append("Boil Malts with plenty of water")
         instructions.stepsToDo.append("At the start of boil process add start hops")
@@ -19,10 +19,10 @@ extension BrewManager {
         instructions.stepsToDo.append("Let the brew cool down")
         instructions.stepsToDo.append("Add yeast and start fermentation process")
         instructions.stepsToDo.append("Wait until fermentation finshes")
-        
+
         return instructions
     }
-    
+
     //    func setBrewInstruction(for beer: Beer) -> [Instruction] {
     //        // in case ingredients or method are missing, there is no point to continue
     //        guard let ingredients = beer.ingredients else { return [] }
@@ -101,7 +101,7 @@ extension BrewManager {
     //
     //        // 8. cool down, add yeast and start fermetnation
     //        instructions.append(Instruction(id: 0,
-    //                                        instruction: "Cool the brew down,\nAdd Yeast,\nWait fermentation to finish!",
+    //                                        instruction: "Cool brew down, Add Yeast, Wait fermentation to finish!",
     //                                        state: .toDo))
     //
     //        return instructions

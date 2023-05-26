@@ -9,58 +9,55 @@ import Foundation
 
 class NetworkManager {
     static let shared = NetworkManager()
-    
+
     private init() {}
-    
-    
-    func networkCall<T: Decodable>(with url: URL?, completionHandler completion: @escaping (Result<T, NetworkError>) -> Void) async {
+
+    func networkCall<T: Decodable>(with url: URL?, completion: @escaping (Result<T, NetworkError>) -> Void) async {
         guard let url = url else {
             completion(.failure(.failedCreatingURL))
             return
         }
-        
+
         let request = URLRequest(url: url)
-        
-        
+
         URLSession.shared.dataTask(with: request) { data, urlResponse, error in
             // handle eventual error
             guard error == nil else {
                 completion(.failure(.unableToComplete))
                 return
             }
-            
+
             // check url response
             guard let httpResponse = urlResponse as? HTTPURLResponse else {
                 completion(.failure(.invalidResponse))
                 return
             }
-            
+
             print("Status Code: \(httpResponse.statusCode) - \(request.url?.absoluteString ?? "URL n/a")")
-            
+
             // check http status code
             guard (200...299).contains(httpResponse.statusCode) else {
                 completion(.failure(.invalidStatusCode))
                 return
             }
-            
+
             // check data availability
             guard let data = data else {
                 completion(.failure(.invalidData))
                 return
             }
-            
+
             // parse data
-            self.parse(data: data, completionHandler: completion)
+            self.parse(data: data, completion: completion)
         }
         .resume()
     }
-    
-    
-    private func parse<T: Decodable>(data: Data, completionHandler completion: @escaping (Result<T, NetworkError>) -> Void) {
+
+    private func parse<T: Decodable>(data: Data, completion: @escaping (Result<T, NetworkError>) -> Void) {
         do {
             let decoder = JSONDecoder()
-            //decoder.dateDecodingStrategy = .iso8601
-            
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+
             let element: T = try decoder.decode(T.self, from: data)
             completion(.success(element))
         } catch let DecodingError.dataCorrupted(context) {
@@ -84,4 +81,3 @@ class NetworkManager {
         }
     }
 }
-
