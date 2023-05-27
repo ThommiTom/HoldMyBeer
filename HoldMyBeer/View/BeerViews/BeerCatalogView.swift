@@ -14,98 +14,37 @@ struct BeerCatalogView: View {
 
     var body: some View {
         NavigationStack {
-            HStack(spacing: 20) {
-                Image(systemName: "arrow.right")
-                Text("Swipe right to add beer to Brews")
-                Image(systemName: "arrow.right")
-            }
-            .font(.caption)
-            .bold()
-            .foregroundColor(.blue)
+            swipeActionIndicator
+
             Group {
                 if beerManager.searchedBeers.isEmpty {
                     List {
-                        ForEach(beerManager.sortedBeers) { beer in
-                            NavigationLink(value: beer) {
-                                BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
-                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        if !beerManager.beersToBrew.contains(beer.id) {
-                                            Button {
-                                                beerManager.addToBrews(id: beer.id)
-                                                beerManager.saveBeerToBrews(beer)
-                                            } label: {
-                                                Label("Add to Brews", systemImage: "checklist")
-                                            }
-                                            .tint(.blue)
-                                        }
-                                    }
-                            }
-                        }
-
-                        ShowMoreButton(showButton: $beerManager.isShowMoreButtonActive) {
-                            beerManager.getBeers()
-                        }
+                        BeerListContent(beerManager: beerManager, beers: beerManager.sortedBeers)
+                        ShowMoreButton(showButton: $beerManager.isShowMoreButtonActive, getBeers: beerManager.getBeers)
                     }
                 } else {
                     List {
-                        ForEach(beerManager.sortedSearchedBeers) { beer in
-                            NavigationLink(value: beer) {
-                                BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
-                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        if !beerManager.beersToBrew.contains(beer.id) {
-                                            Button {
-                                                beerManager.addToBrews(id: beer.id)
-                                                beerManager.saveBeerToBrews(beer)
-                                            } label: {
-                                                Label("Add to Brews", systemImage: "checklist")
-                                            }
-                                            .tint(.blue)
-                                        }
-                                    }
-                            }
-                        }
+                        BeerListContent(beerManager: beerManager, beers: beerManager.sortedSearchedBeers)
                     }
                 }
             }
             .listStyle(.plain)
             .navigationTitle(beerManager.searchedBeers.isEmpty ? "Beer Catalog" : "Search Result")
             .navigationDestination(for: Beer.self) { beer in
-                BeerDetailView(beer: beer)
+                BeerDetailView(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id)) { beer in
+                    beerManager.saveBeerToBrews(beer)
+                }
             }
             .toolbar {
-                if !beerManager.searchedBeers.isEmpty {
-                    ToolbarItemGroup(placement: .navigationBarLeading) {
-                        Button {
-                            beerManager.resetSearchResult()
-                        } label: {
-                            Image(systemName: "xmark.circle")
-                        }
-                    }
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    deleteButton
                 }
-
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Menu {
-                        ForEach(BeerSorting.allCases) { sortCase in
-                            Button(sortCase.rawValue) {
-                                self.beerManager.sorting = sortCase
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "arrow.up.arrow.down")
-                    }
-
-                    Button {
-                        showSheet = true
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                    }
+                    sortingMenu
                 }
             }
             .sheet(isPresented: $showSheet) {
-                SearchView {
-                    beerManager.searchBeers()
-//                    beerManager.searchBeersOverCombine()
-                }
+                SearchView(searchBeers: beerManager.searchBeers)
             }
             .onAppear {
                 beerManager.loadBeersToBrew()
@@ -124,5 +63,51 @@ struct BeerCatalogView: View {
 struct BeerCatalogView_Previews: PreviewProvider {
     static var previews: some View {
         BeerCatalogView()
+    }
+}
+
+extension BeerCatalogView {
+    var swipeActionIndicator: some View {
+        HStack(spacing: 20) {
+            Image(systemName: "arrow.right")
+            Text("Swipe right to add beer to Brews")
+            Image(systemName: "arrow.right")
+        }
+        .font(.caption)
+        .bold()
+        .foregroundColor(.blue)
+    }
+
+    var deleteButton: some View {
+        Group {
+            if !beerManager.searchedBeers.isEmpty {
+                Button {
+                    beerManager.resetSearchResult()
+                } label: {
+                    Image(systemName: "xmark.circle")
+                        .foregroundColor(.red)
+                }
+            }
+        }
+    }
+
+    var sortingMenu: some View {
+        Group {
+            Menu {
+                ForEach(BeerSorting.allCases) { sortCase in
+                    Button(sortCase.rawValue) {
+                        self.beerManager.sorting = sortCase
+                    }
+                }
+            } label: {
+                Image(systemName: "arrow.up.arrow.down")
+            }
+
+            Button {
+                showSheet = true
+            } label: {
+                Image(systemName: "magnifyingglass")
+            }
+        }
     }
 }

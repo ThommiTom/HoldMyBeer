@@ -46,6 +46,7 @@
 		45DB5E6E2A0EA80600CBE230 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB5E6D2A0EA80600CBE230 /* NetworkManager.swift */; };
 		45DB5E702A0EA8DA00CBE230 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB5E6F2A0EA8DA00CBE230 /* NetworkError.swift */; };
 		45DB5E732A0EC12600CBE230 /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB5E722A0EC12600CBE230 /* URLBuilder.swift */; };
+		45E455CD2A222CD2007456CE /* BeerListContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E455CC2A222CD2007456CE /* BeerListContent.swift */; };
 		45FFCE962A11F33900D7F3A2 /* BrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FFCE952A11F33900D7F3A2 /* BrewView.swift */; };
 		45FFCE982A11F4F600D7F3A2 /* Brew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FFCE972A11F4F600D7F3A2 /* Brew.swift */; };
 		45FFCE9A2A11FC8D00D7F3A2 /* EmptyBrewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FFCE992A11FC8D00D7F3A2 /* EmptyBrewView.swift */; };
@@ -92,6 +93,7 @@
 		45DB5E6D2A0EA80600CBE230 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		45DB5E6F2A0EA8DA00CBE230 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		45DB5E722A0EC12600CBE230 /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
+		45E455CC2A222CD2007456CE /* BeerListContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListContent.swift; sourceTree = "<group>"; };
 		45FFCE952A11F33900D7F3A2 /* BrewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrewView.swift; sourceTree = "<group>"; };
 		45FFCE972A11F4F600D7F3A2 /* Brew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brew.swift; sourceTree = "<group>"; };
 		45FFCE992A11FC8D00D7F3A2 /* EmptyBrewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBrewView.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				452703552A0F89E900469098 /* BeerCatalogView.swift */,
+				45E455CC2A222CD2007456CE /* BeerListContent.swift */,
 				45CE97322A0FED81008EC77A /* BeerListItem.swift */,
 				45C07A622A1112590058B3B9 /* BeerDetailView.swift */,
 				45C07A642A1122550058B3B9 /* IngredientsView.swift */,
@@ -404,6 +407,7 @@
 				45C07A562A10C8BE0058B3B9 /* SommelierView.swift in Sources */,
 				45C07A542A10C2270058B3B9 /* ShowMoreButton.swift in Sources */,
 				452703562A0F89E900469098 /* BeerCatalogView.swift in Sources */,
+				45E455CD2A222CD2007456CE /* BeerListContent.swift in Sources */,
 				45BEF1D02A12C9D2008F9926 /* RatingView.swift in Sources */,
 				45FFCE962A11F33900D7F3A2 /* BrewView.swift in Sources */,
 				45CE972B2A0FB2FD008EC77A /* IBU.swift in Sources */,
