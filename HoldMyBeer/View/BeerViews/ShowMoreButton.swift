@@ -20,6 +20,8 @@ struct ShowMoreButton: View {
                 } label: {
                     Text("show more")
                         .font(.caption)
+                        .foregroundColor(.blue)
+                        .opacity(0.8)
                 }
                 Spacer()
             }
