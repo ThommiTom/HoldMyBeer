@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct BeerCatalogView: View {
-    @StateObject var beerManager = BeerManager()
+    @ObservedObject var beerManager = BeerManager()
 
     @State private var showSheet = false
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $beerManager.navigationPath) {
             swipeActionIndicator
 
             Group {

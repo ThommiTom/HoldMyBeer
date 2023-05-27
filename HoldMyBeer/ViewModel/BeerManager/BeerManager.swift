@@ -6,6 +6,7 @@
 //
 
 // import Combine
+import SwiftUI
 import Foundation
 
 class BeerManager: ObservableObject {
@@ -18,6 +19,8 @@ class BeerManager: ObservableObject {
     @Published private(set) var beersToBrew = [Int]()
 
     @Published var sorting: BeerSorting = .none
+
+    @Published var navigationPath = NavigationPath()
 
     init() {
         self.getBeers()
@@ -80,5 +83,9 @@ class BeerManager: ObservableObject {
         for item in loaded {
             beersToBrew.append(item.id)
         }
+    }
+
+    func resetPath() {
+        navigationPath = NavigationPath()
     }
 }
