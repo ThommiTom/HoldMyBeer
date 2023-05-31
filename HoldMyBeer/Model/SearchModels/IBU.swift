@@ -11,7 +11,6 @@ struct IBU: CommonProperties {
     let title = "IBU"
     let description =
     """
-
     International Bitterness Unit attempt to rate
     the relative bitterness of beer.
     The bitterness of beer is provided by compounds such as humulones,

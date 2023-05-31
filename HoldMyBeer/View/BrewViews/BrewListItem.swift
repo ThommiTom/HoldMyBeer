@@ -19,7 +19,7 @@ struct BrewListItem: View {
                     .tint(brew.beer.ebc != nil ? EBCScale.getColor(by: brew.beer.ebc!) : .blue)
                     .padding()
                 Spacer()
-                Text("\(brew.progress, specifier: "%.1f")%")
+                Text("\(brew.progress.decimalSpecifier(1))%")
             }
         }
     }

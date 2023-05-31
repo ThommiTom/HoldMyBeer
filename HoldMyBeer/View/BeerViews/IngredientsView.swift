@@ -26,7 +26,7 @@ struct IngredientsView: View {
                         HStack {
                             Text(malt.name)
                             Spacer()
-                            Text("\(value, specifier: "%.1f")")
+                            Text("\(value.decimalSpecifier(1))")
                             Text(malt.amount.unit)
                         }
                     }
@@ -43,7 +43,7 @@ struct IngredientsView: View {
                         HStack {
                             Text(hop.name)
                             Spacer()
-                            Text("\(value, specifier: "%.1f")")
+                            Text("\(value.decimalSpecifier(1))")
                             Text(hop.amount.unit)
                         }
                     }

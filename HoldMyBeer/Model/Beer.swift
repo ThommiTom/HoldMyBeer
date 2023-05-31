@@ -18,7 +18,6 @@ struct Beer: Identifiable, Codable, Hashable {
     let targetOg: Double?
     let ebc: Double?
     let srm: Double?
-//    let ph: Double?
     let attenuationLevel: Double?
 
     let ingredients: Ingredients?
@@ -46,7 +45,6 @@ struct Beer: Identifiable, Codable, Hashable {
                               targetOg: nil,
                               ebc: nil,
                               srm: nil,
-//                              ph: nil,
                               attenuationLevel: nil,
                               ingredients: nil,
                               foodPairing: [String](),

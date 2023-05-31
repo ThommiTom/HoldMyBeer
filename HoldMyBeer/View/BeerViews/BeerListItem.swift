@@ -87,12 +87,12 @@ extension BeerListItem {
                     .frame(width: 25, height: 25, alignment: .center)
             }
             Spacer()
-            Text("alc \(beer.abv, specifier: "%.1f") % vol.")
+            Text("alc \(beer.abv.decimalSpecifier(1)) % vol.")
                 .foregroundColor(.secondary)
                 .font(.caption)
             Spacer()
             if let ibu = beer.ibu {
-                Text("Bitterness \(ibu, specifier: "%.0f")/120")
+                Text("Bitterness \(ibu.decimalSpecifier(0))/120")
                     .foregroundColor(.secondary)
                     .font(.caption)
             }

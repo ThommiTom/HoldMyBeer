@@ -26,7 +26,7 @@ struct BrewView: View {
 
             beerRatingView
         }
-        .navigationTitle("Brew Progress \(brewManager.brews[index].progress, specifier: "%.1f") %")
+        .navigationTitle("Brew Progress \(brewManager.brews[index].progress.decimalSpecifier(1)) %")
         .navigationDestination(for: Beer.self) { beer in
             BeerDetailView(beer: beer)
         }
