@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BeerCatalogView: View {
-    @ObservedObject var beerManager = BeerManager()
+    @StateObject var beerManager = BeerManager()
 
     @State private var showSheet = false
 
@@ -31,8 +31,12 @@ struct BeerCatalogView: View {
             .listStyle(.plain)
             .navigationTitle(beerManager.searchedBeers.isEmpty ? "Beer Catalog" : "Search Result")
             .navigationDestination(for: Beer.self) { beer in
-                BeerDetailView(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id)) { beer in
+                BeerDetailView(beer: beer) { beer in
                     beerManager.saveBeerToBrews(beer)
+                } loadBeers: {
+                    beerManager.loadBeersToBrew()
+                } inBrews: {
+                    beerManager.containedInBrews(id: beer.id)
                 }
             }
             .toolbar {

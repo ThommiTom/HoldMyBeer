@@ -68,7 +68,7 @@ class BeerManager: ObservableObject {
         }
     }
 
-    func containedInToBrew(id: Int) -> Bool {
+    func containedInBrews(id: Int) -> Bool {
         beersToBrew.contains(id)
     }
 

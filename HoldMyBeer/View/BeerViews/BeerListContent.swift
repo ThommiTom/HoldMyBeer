@@ -14,7 +14,7 @@ struct BeerListContent: View {
     var body: some View {
         ForEach(beers) { beer in
             NavigationLink(value: beer) {
-                BeerListItem(beer: beer, containedInToBrew: beerManager.containedInToBrew(id: beer.id))
+                BeerListItem(beer: beer, containedInToBrew: beerManager.containedInBrews(id: beer.id))
                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
                         if !beerManager.beersToBrew.contains(beer.id) {
                             Button {

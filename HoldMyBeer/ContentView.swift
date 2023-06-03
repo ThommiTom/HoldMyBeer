@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var beerManager = BeerManager()
-
     var body: some View {
         TabView {
-            BeerCatalogView(beerManager: beerManager)
+            BeerCatalogView()
                 .tabItem {
                     Image(systemName: "list.clipboard")
                     Text("Beers")
@@ -22,9 +20,6 @@ struct ContentView: View {
             .tabItem {
                 Image(systemName: "checklist")
                 Text("Brews")
-            }
-            .onAppear {
-                beerManager.resetPath()
             }
         }
     }

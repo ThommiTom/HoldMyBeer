@@ -9,12 +9,14 @@ import SwiftUI
 
 struct BeerDetailView: View {
     let beer: Beer
-    @State var containedInToBrew: Bool = false
+    @State var showInBrewsLabel: Bool = false
     var saveBeerToBrews: ((Beer) -> Void)?
+    var loadBeers: (() -> Void)?
+    var inBrews: (() -> Bool)?
 
     var body: some View {
         VStack {
-            BeerListItem(beer: beer, containedInToBrew: containedInToBrew, width: 75, height: 150)
+            BeerListItem(beer: beer, containedInToBrew: showInBrewsLabel, width: 75, height: 150)
 
             ScrollView {
                 description
@@ -28,13 +30,19 @@ struct BeerDetailView: View {
                 addBeerButton
             }
         }
+        .onAppear {
+            if loadBeers != nil && inBrews != nil {
+                loadBeers!()
+                showInBrewsLabel =  inBrews!()
+            }
+        }
         .padding()
     }
 }
 
 struct BeerDetailList_Previews: PreviewProvider {
     static var previews: some View {
-        BeerDetailView(beer: .example, containedInToBrew: true)
+        BeerDetailView(beer: .example, showInBrewsLabel: true)
     }
 }
 
@@ -69,13 +77,14 @@ extension BeerDetailView {
 
     var addBeerButton: some View {
         Group {
-            if !containedInToBrew && saveBeerToBrews != nil {
+            if saveBeerToBrews != nil {
                 Button {
-                    containedInToBrew = true
+                    showInBrewsLabel = true
                     saveBeerToBrews!(beer)
                 } label: {
                     Text("Add 🍺 to Brews")
                 }
+                .disabled(showInBrewsLabel)
             }
         }
     }
